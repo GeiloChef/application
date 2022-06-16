@@ -1,0 +1,44 @@
+// $orange_main: #ff9400;
+$orange_main: #ff9d00;
+$black_main: #1f1f1f;
+
+
+.flex {
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    flex-wrap: wrap;
+}
+
+.content {
+    padding: 6vh 12vw;
+}
+
+.orange_main {
+    background-color: $orange_main;
+    color: $black_main;
+
+    .triangle {
+        background-color: $black_main;
+        color: $orange_main;
+        border-color: $orange_main transparent transparent transparent;
+    }
+}
+
+.black_main {
+    background-color: $black_main;
+    color: $orange_main;
+
+    .triangle {
+        background-color: $orange_main;
+        color: $black_main;
+        border-color: $black_main transparent transparent transparent;
+    }
+}
+
+.text-headline {
+    font-size: 300%;
+    text-align: center;
+    font-style: italic;
+    line-height: 300%;
+}

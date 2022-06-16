@@ -1,5 +1,5 @@
 <template>
-    <div class="homeAboutMe black_main">
+    <div class="homeAboutMe secondary_color">
         <div class="content flex">
             <div class="col flex image">
                 <img src="https://image.brigitte.de/11674438/t/-B/v3/w1440/r1.5/-/bewerbung-foto-bild.jpg" />
@@ -18,7 +18,7 @@
                 </div>
             </div>
         </div>
-        <SectionEndTriangle class="black_main" />
+        <SectionEndTriangle class="secondary_color" />
     </div>
 </template>
 
@@ -32,7 +32,7 @@ export default {
 
     data: function () {
         const buttonInfo = {
-            class: "orange_main",
+            class: "primary_color",
             text: "Mehr über mich..."
         }
         return {

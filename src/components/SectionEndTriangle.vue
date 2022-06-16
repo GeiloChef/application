@@ -28,17 +28,17 @@ $triangle_height: 4rem;
     height: 0;
     border-style: solid;
     border-width: $triangle_height 35vw 0 35vw;
-    border-color: $orange_main transparent transparent transparent;
+    border-color: $primary_color transparent transparent transparent;
 }
 
 .orange {
-    border-color: $orange_main transparent transparent transparent;
-    color: $black_main;
+    border-color: $primary_color transparent transparent transparent;
+    color: $secondary_color;
 }
 
 .black {
-    border-color: $black_main transparent transparent transparent;
-    color: $orange_main;
+    border-color: $secondary_color transparent transparent transparent;
+    color: $primary_color;
 }
 
 .text {

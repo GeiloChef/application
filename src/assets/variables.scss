@@ -1,6 +1,6 @@
-// $orange_main: #ff9400;
-$orange_main: #ff9d00;
-$black_main: #1f1f1f;
+// $primary_color: #ff9400;
+$primary_color: #66ccff;
+$secondary_color: #1f1f1f;
 
 
 .flex {
@@ -14,25 +14,25 @@ $black_main: #1f1f1f;
     padding: 6vh 12vw;
 }
 
-.orange_main {
-    background-color: $orange_main;
-    color: $black_main;
+.primary_color {
+    background-color: $primary_color;
+    color: $secondary_color;
 
     .triangle {
-        background-color: $black_main;
-        color: $orange_main;
-        border-color: $orange_main transparent transparent transparent;
+        background-color: $secondary_color;
+        color: $primary_color;
+        border-color: $primary_color transparent transparent transparent;
     }
 }
 
-.black_main {
-    background-color: $black_main;
-    color: $orange_main;
+.secondary_color {
+    background-color: $secondary_color;
+    color: $primary_color;
 
     .triangle {
-        background-color: $orange_main;
-        color: $black_main;
-        border-color: $black_main transparent transparent transparent;
+        background-color: $primary_color;
+        color: $secondary_color;
+        border-color: $secondary_color transparent transparent transparent;
     }
 }
 

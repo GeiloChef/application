@@ -1,5 +1,5 @@
 <template>
-    <div class="homeHeader orange_main">
+    <div class="homeHeader primary_color">
         <div class="content">
 
         </div>
@@ -23,7 +23,7 @@ export default {
 @import "@/assets/variables.scss";
 
 .content{
-    background: $orange_main;
+    background: $primary_color;
     height: 45vh;
 }
 </style>

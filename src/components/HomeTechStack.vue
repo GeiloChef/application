@@ -1,5 +1,5 @@
 <template>
-    <div class="homeTechStack black_main">
+    <div class="homeTechStack secondary_color">
         <div class="content flex">
             <h3>Mein Tech-Stack</h3>
             <div class="techStack flex">
@@ -21,7 +21,7 @@ export default {
     name: "HomeTechStack",
     data: function () {
         const buttonInfo = {
-            class: "orange_main",
+            class: "primary_color",
             text: "Mein Kompletter Tech-Stack",
             size: "x-large"
         }

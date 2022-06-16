@@ -16,7 +16,7 @@
                     </span>
                 </v-card-text>
                 <v-card-actions>
-                    <v-btn v-for="link in referenz.links" v-bind:key="link.href" class="orange_main action_btn" size="small" rounded>
+                    <v-btn v-for="link in referenz.links" v-bind:key="link.href" class="primary_color action_btn" size="small" rounded>
                         {{ link.name }}
                     </v-btn>
                 </v-card-actions>
@@ -49,7 +49,7 @@ export default {
 
 
 .headline {
-    color: $orange_main;
+    color: $primary_color;
     font-size: 250%;
     line-height: 150%;
 }

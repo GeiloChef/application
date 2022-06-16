@@ -1,5 +1,5 @@
 <template>
-    <div class="homeReferenzen orange_main">
+    <div class="homeReferenzen primary_color">
         <div class="content">
             <div class="content flex">
                 <h3 class="headline">Meine Referenzen</h3>
@@ -7,7 +7,7 @@
                     Arbeitszeugnisse und Zertifikate nachweisen.</span>
                 <HomeReferenzenSlider />
             </div>
-            <SectionEndTriangle class="orange_main" />
+            <SectionEndTriangle class="primary_color" />
         </div>
     </div>
 </template>

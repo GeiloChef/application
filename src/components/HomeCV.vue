@@ -1,5 +1,5 @@
 <template>
-    <div class="homeCV orange_main">
+    <div class="homeCV primary_color">
         <div class="content flex">
             <h3>Meine bisherigen Milestones</h3>
             <HomeCVTimeline />
@@ -19,7 +19,7 @@ export default {
     name: "HomeCV",
     data: function () {
         const buttonInfo = {
-            class: "black_main",
+            class: "secondary_color",
             text: "Mein kompletter Lebenslauf",
             size: "x-large"
         }

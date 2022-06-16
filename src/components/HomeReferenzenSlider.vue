@@ -22,7 +22,7 @@
 
             </v-card>
             <div class="flex selector">
-                <v-chip-group v-model="amenities" column multiple color-active="orange_main">
+                <v-chip-group v-model="amenities" column multiple color-active="primary_color">
                     <v-chip filter outlined>
                         Projekte
                     </v-chip>

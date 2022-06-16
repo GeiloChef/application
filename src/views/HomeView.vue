@@ -23,7 +23,7 @@ export default {
     HomeAboutMe,
     HomeCV,
     HomeTechStack,
-    HomeReferenzen
+    HomeReferenzen,
 }
 }
 </script>

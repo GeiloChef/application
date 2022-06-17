@@ -3,7 +3,7 @@
         <div class="content flex">
             <h3>Meine bisherigen Milestones</h3>
             <HomeCVTimeline />
-            <div class="buttonParent">
+            <div class="buttonParent" :class="displayBreakpointName">
                 <ButtonComponent v-bind:buttonInfo="buttonInfo" />
             </div>
         </div>
@@ -20,14 +20,27 @@ export default {
     data: function () {
         const buttonInfo = {
             class: "secondary_color",
-            text: "Mein kompletter Lebenslauf",
+            text: "Alles aus meinem Leben",
             size: "x-large"
         }
         return {
             buttonInfo
         };
     },
-    components: { HomeCVTimeline, SectionEndTriangle, ButtonComponent }
+    components: { HomeCVTimeline, SectionEndTriangle, ButtonComponent },
+    computed: {
+        displayBreakpointName() { return (this.$vuetify.display.name) }
+    },
+    mounted(){
+        switch (this.$vuetify.display.name) {
+            case "xs":
+                this.buttonInfo.size = "large"
+                break;
+        
+            default:
+                break;
+        }
+    }
 }
 </script>
 
@@ -40,8 +53,12 @@ export default {
     }
 }
 
-.buttonParent{
+.buttonParent {
     width: 40vw;
     margin-top: 3rem;
+}
+
+.buttonParent.xs{
+    width: auto;
 }
 </style>

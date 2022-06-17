@@ -14,6 +14,19 @@ $secondary_color: #1f1f1f;
     padding: 6vh 12vw;
 }
 
+.content.xs{
+    padding: 4vh 2vw;
+    overflow-x: hidden;
+
+    .text-headline {
+        font-size: 300%;
+        text-align: center;
+        font-style: italic;
+        line-height: 125%;
+        margin-bottom: 2rem;
+    }
+}
+
 .primary_color {
     background-color: $primary_color;
     color: $secondary_color;

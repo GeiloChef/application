@@ -24,6 +24,9 @@ export default {
     HomeCV,
     HomeTechStack,
     HomeReferenzen,
-}
+  },
+  computed: {
+    displayBreakpointName() { return (this.$vuetify.display.name) }
+  }
 }
 </script>

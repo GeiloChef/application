@@ -1,13 +1,9 @@
 <template>
-
-  <!-- <nav>
-    <router-link to="/">Home</router-link> |
-  </nav> -->
-  <v-app>
+  <v-app :class="displayBreakpointName">
     <v-main>
       <router-view></router-view>
     </v-main>
-    <FooterComponent/>
+    <FooterComponent />
   </v-app>
 
 </template>
@@ -15,8 +11,11 @@
 <script>
 import FooterComponent from './components/FooterComponent.vue';
 export default {
-    name: "AppView",
-    components: { FooterComponent }
+  name: "AppView",
+  components: { FooterComponent },
+  computed: {
+    displayBreakpointName() { return (this.$vuetify.display.name) }
+  }
 }
 </script>
 
@@ -26,5 +25,9 @@ export default {
 html,
 body {
   background-color: $secondary_color;
+}
+
+.xs{
+  overflow: hidden;
 }
 </style>

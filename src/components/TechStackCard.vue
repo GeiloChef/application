@@ -1,5 +1,5 @@
 <template>
-    <div class="techStackCard">
+    <div class="techStackCard" :class="displayBreakpointName">
         <div v-if="item.type === 'tech'">
         <v-card class="mx-auto" max-width="200" rounded>
             <v-img :src="item.src" height="100px" cover></v-img>
@@ -23,7 +23,10 @@ export default {
     name: "TechStackCard",
     props: {
         item: Object,
-    }
+    },
+    computed: {
+        displayBreakpointName() { return (this.$vuetify.display.name) }
+    },
 }
 </script>
 
@@ -35,5 +38,10 @@ export default {
     .title {
         font-size: 150%;
     }
+}
+
+.techStackCard.xs{
+    flex: 0 0 46%;
+    margin: 2% 2%;
 }
 </style>

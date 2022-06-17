@@ -2,10 +2,10 @@
     <div class="homeTechStack secondary_color">
         <div class="content flex">
             <h3>Mein Tech-Stack</h3>
-            <div class="techStack flex">
+            <div class="techStack flex" :class="displayBreakpointName">
                 <TechStackCard v-for="item in techStack" v-bind:item="item" v-bind:key="item.id" />
             </div>
-            <div class="buttonParent">
+            <div class="buttonParent" :class="displayBreakpointName">
                 <ButtonComponent v-bind:buttonInfo="buttonInfo" />
             </div>
         </div>
@@ -19,6 +19,7 @@ import TechStackCard from './TechStackCard.vue';
 import ButtonComponent from './ButtonComponent.vue';
 export default {
     name: "HomeTechStack",
+    components: { SectionEndTriangle, TechStackCard, ButtonComponent },
     data: function () {
         const buttonInfo = {
             class: "primary_color",
@@ -58,7 +59,19 @@ export default {
             techStack
         };
     },
-    components: { SectionEndTriangle, TechStackCard, ButtonComponent }
+    computed: {
+        displayBreakpointName() { return (this.$vuetify.display.name) }
+    },
+    mounted() {
+        switch (this.$vuetify.display.name) {
+            case "xs":
+                this.buttonInfo.size = "large"
+                break;
+
+            default:
+                break;
+        }
+    }
 }
 </script>
 
@@ -77,8 +90,12 @@ export default {
     width: 100%;
 }
 
-.buttonParent{
+.buttonParent {
     width: 40vw;
     margin-top: 3rem;
+}
+
+.buttonParent.xs{
+    width: auto;
 }
 </style>

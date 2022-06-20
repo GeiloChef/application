@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="text flex">Next Section</div>
+        <!-- <div class="text flex">        </div> -->
         <div class="triangle" :class="backgroundColor"></div>
     </div>
 </template>

@@ -2,11 +2,11 @@
     <div class="homeTechStack secondary_color">
         <div class="content flex">
             <h3>Mein Tech-Stack</h3>
-            <div class="techStack flex" :class="displayBreakpointName">
-                <TechStackCard v-for="item in techStack" v-bind:item="item" v-bind:key="item.id" />
+            <div class="techStack flex" :class="displayBreakpointName" v-if="techstackShownNumber !== 0">
+                <TechStackCard v-for="item in techstackItemsShown" v-bind:item="item.attributes" v-bind:key="item.id" />
             </div>
             <div class="buttonParent" :class="displayBreakpointName">
-                <ButtonComponent v-bind:buttonInfo="buttonInfo" />
+                <ButtonComponent @clicked="showFullStack" v-bind:buttonInfo="buttonInfo" />
             </div>
         </div>
         <SectionEndTriangle />
@@ -17,6 +17,7 @@
 import SectionEndTriangle from './SectionEndTriangle.vue'
 import TechStackCard from './TechStackCard.vue';
 import ButtonComponent from './ButtonComponent.vue';
+import strapiService from '@/services/strapi.service';
 export default {
     name: "HomeTechStack",
     components: { SectionEndTriangle, TechStackCard, ButtonComponent },
@@ -27,41 +28,38 @@ export default {
             size: "x-large",
             block: true,
         }
-        const techStack = [
-            {
-                id: 1,
-                title: "Node.js",
-                type: "tech",
-                src: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Node.js_logo.svg/1280px-Node.js_logo.svg.png",
-            },
-            {
-                id: 2,
-                title: "Vue.js",
-                type: "tech",
-                src: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Vue.js_Logo_2.svg/2367px-Vue.js_Logo_2.svg.png"
-            },
-
-            {
-                id: 11,
-                title: "Node.js",
-                type: "tech",
-                src: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Node.js_logo.svg/1280px-Node.js_logo.svg.png",
-            },
-            {
-                id: 22,
-                title: "Vue.js",
-                type: "tech",
-                src: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Vue.js_Logo_2.svg/2367px-Vue.js_Logo_2.svg.png"
-            },
-
-        ]
         return {
             buttonInfo,
-            techStack
+            techstackDefaultShownNumber: 5,
+            techstackShownNumber: 0,
+            techstackItems: new Array(),
+            techstackItemsShown: new Array(),
         };
     },
     computed: {
         displayBreakpointName() { return (this.$vuetify.display.name) }
+    },
+    methods: {
+        showFullStack() {
+            this.techstackShownNumber = (this.techstackShownNumber === this.techstackDefaultShownNumber)
+                ? this.techstackItems.length
+                : this.techstackDefaultShownNumber
+            this.techstackItemsShown = [];
+            for (let i = 0; i < this.techstackShownNumber; i++) {
+                this.techstackItemsShown.push(this.techstackItems[i]);
+            }
+            console.log(this.techstackItemsShown.length);
+        }
+    },
+    created() {
+        strapiService.getData('techstacks').then(response => {
+            console.log(response);
+            this.techstackItems = response.data;
+            this.techstackShownNumber = this.techstackDefaultShownNumber;
+            for (let i = 0; i < this.techstackShownNumber; i++) {
+                this.techstackItemsShown.push(this.techstackItems[i]);
+            }
+        });
     },
     mounted() {
         switch (this.$vuetify.display.name) {
@@ -89,7 +87,21 @@ export default {
 
 .techStack {
     width: 100%;
+    height: 100%;
+
+    @for $i from 1 to 6 {
+        div:nth-child(#{$i}) {
+            animation-delay: (0.1 * $i) + 0.3s;
+        }
+    }
+
+    @for $i from 1 to 15 {
+        div:nth-child(#{$i + 5}) {
+            animation-delay: (0.1s * $i);
+        }
+    }
 }
+
 
 .buttonParent {
     width: 40vw;

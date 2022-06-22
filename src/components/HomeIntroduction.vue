@@ -183,66 +183,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@keyframes fadeIn {
-    0% {
-        opacity: 0;
-        visibility: hidden;
-    }
+// for variables and animations
+@import "@/assets/variables.scss";
 
-    100% {
-        opacity: 1;
-        visibility: visible;
-    }
-}
-
-.fadeIn {
-    animation-name: fadeIn;
-    animation-duration: 1s;
-    animation-fill-mode: forwards;
-}
-
-@keyframes moveToLeft {
-    0% {
-        transform: translateX(0);
-    }
-
-    15% {
-        transform: translateX(20%);
-    }
-
-    100% {
-        transform: translateX(-200%);
-        visibility: hidden;
-    }
-
-}
-
-.moveToLeft {
-    animation-name: moveToLeft;
-    animation-duration: 1s;
-    animation-timing-function: cubic-bezier(.44, .14, .34, 1);
-    animation-fill-mode: forwards;
-}
-
-@keyframes moveFromBottom {
-    0% {
-        transform: translateY(50%);
-        opacity: 0;
-    }
-
-    100% {
-        transform: translateY(0%);
-        opacity: 1;
-    }
-
-}
-
-.moveFromBottom {
-    animation-name: moveFromBottom;
-    animation-duration: 1s;
-    animation-timing-function: cubic-bezier(.44, .14, .34, 1);
-    animation-fill-mode: forwards;
-}
 
 
 .homeIntro {

@@ -38,7 +38,8 @@ export default {
   },
   computed: {
     displayBreakpointName() { return (this.$vuetify.display.name) }
-  }
+  },
+
 }
 </script>
 

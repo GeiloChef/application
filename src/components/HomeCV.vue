@@ -21,7 +21,8 @@ export default {
         const buttonInfo = {
             class: "secondary_color",
             text: "Alles aus meinem Leben",
-            size: "x-large"
+            size: "x-large",
+            block: true,
         }
         return {
             buttonInfo

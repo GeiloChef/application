@@ -24,7 +24,8 @@ export default {
         const buttonInfo = {
             class: "primary_color",
             text: "Mein Kompletter Tech-Stack",
-            size: "x-large"
+            size: "x-large",
+            block: true,
         }
         const techStack = [
             {
@@ -95,7 +96,7 @@ export default {
     margin-top: 3rem;
 }
 
-.buttonParent.xs{
+.buttonParent.xs {
     width: auto;
 }
 </style>

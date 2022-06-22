@@ -35,7 +35,8 @@ export default {
     data: function () {
         const buttonInfo = {
             class: "primary_color",
-            text: "Mehr über mich..."
+            text: "Mehr über mich...",
+            block: true,
         }
         return {
             buttonInfo,
@@ -70,6 +71,7 @@ export default {
 
 .col.xs {
     width: 100% !important;
+
     img {
         max-width: 90%;
         border-radius: 5%;

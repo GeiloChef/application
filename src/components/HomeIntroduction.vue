@@ -1,5 +1,5 @@
 <template>
-    <div class="homeIntro flex">
+    <div class="homeIntro flex" :class="displayBreakpointName">
         <!-- Skip Intro Button -->
         <div class="skipIntro" @click="skipIntro">
             <span>{{ skipIntroText }}</span>
@@ -139,7 +139,8 @@ export default {
             console.log(this.currentStage);
             console.log(this.stages.length - 2)
             if (this.currentStage >= (this.stages.length - 2)) {
-                this.enableFullWebsite()
+                this.enableFullWebsite();
+                this.skipIntroText = "Intro nochmals ansehen";
             }
             this.currentStage++;
         },
@@ -171,6 +172,9 @@ export default {
                 }
             }
         }
+    },
+    computed: {
+        displayBreakpointName() { return (this.$vuetify.display.name) }
     },
     mounted() {
         console.log(this.$parent)
@@ -244,96 +248,122 @@ export default {
 .homeIntro {
     height: 100%;
     position: relative;
-}
 
-.skipIntro {
-    cursor: pointer;
-    position: absolute;
-    font-size: 125%;
-    font-weight: bolder;
-    opacity: 0.7;
-    transition-duration: 0.3s;
-}
-
-.skipIntro:hover {
-    font-size: 145%;
-    opacity: 1;
-    transition-duration: 0.3s;
-}
-
-.wrapper {
-    width: 100%;
-}
-
-.introText {
-    font-weight: bolder;
-    width: 100%;
-
-    .headline {
-        font-size: 400%;
-        text-align: center;
-        margin-bottom: 1rem;
+    .skipIntro {
+        cursor: pointer;
+        position: absolute;
+        font-size: 125%;
+        font-weight: bolder;
+        opacity: 0.7;
+        transition-duration: 0.3s;
     }
 
-    .subtitle {
-        font-size: 200%;
-        text-align: center;
+    .skipIntro:hover {
+        font-size: 145%;
+        opacity: 1;
+        transition-duration: 0.3s;
     }
 
-    .subtitle {
-        margin: 1rem 0
+    .wrapper {
+        width: 100%;
     }
 
-    .e0 {
-        opacity: 0;
-        animation-delay: 0.4s
-    }
+    .introText {
+        font-weight: bolder;
+        width: 100%;
 
-    .e1 {
-        opacity: 0;
-        animation-delay: 1.7s;
-    }
-
-    .e2 {
-        opacity: 0;
-        margin-bottom: 2rem;
-        animation-delay: 3s;
-    }
-
-    .e3 {
-        opacity: 0;
-        animation-delay: 4.3s;
-    }
-
-    .stage3 {
-        $initialDelay: 1s;
-        $stage3delay: 0.4s;
-
-
+        .headline {
+            font-size: 400%;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
 
         .subtitle {
-            opacity: 1;
+            font-size: 200%;
+            text-align: center;
+        }
 
-            p {
-                max-width: 100%;
-                font-size: 75%;
-            }
+        .subtitle {
+            margin: 1rem 0
+        }
 
-            .scrollInfo {
-                position: absolute;
-                width: 100%;
-                text-align: center;
-                bottom: 0;
-                opacity: 0;
-                animation-delay: ($stage3delay * 6) + $initialDelay + 1s;
-            }
+        .e0 {
+            opacity: 0;
+            animation-delay: 0.4s
+        }
 
-            @for $i from 1 to 7 {
-                p:nth-child(#{$i}) {
+        .e1 {
+            opacity: 0;
+            animation-delay: 1.7s;
+        }
+
+        .e2 {
+            opacity: 0;
+            margin-bottom: 2rem;
+            animation-delay: 3s;
+        }
+
+        .e3 {
+            opacity: 0;
+            animation-delay: 4.3s;
+        }
+
+        .stage3 {
+            $initialDelay: 1s;
+            $stage3delay: 0.4s;
+
+            .subtitle {
+                opacity: 1;
+
+                p {
+                    max-width: 100%;
+                    font-size: 75%;
+                }
+
+                .scrollInfo {
+                    position: absolute;
+                    width: 100%;
+                    text-align: center;
+                    bottom: 0;
                     opacity: 0;
-                    animation-delay: ($stage3delay * $i) + $initialDelay;
+                    animation-delay: ($stage3delay * 6) + $initialDelay + 1s;
+                }
+
+                @for $i from 1 to 7 {
+                    p:nth-child(#{$i}) {
+                        opacity: 0;
+                        animation-delay: ($stage3delay * $i) + $initialDelay;
+                    }
                 }
             }
+        }
+    }
+}
+
+// Mobile Styles
+.homeIntro.xs {
+    height: 100%;
+    position: relative;
+
+    .skipIntro {
+        font-size: 100%;
+    }
+
+    .introText {
+        .headline {
+            font-size: 250%; // changed
+        }
+
+        .subtitle {
+            font-size: 125%; // changed
+        }
+
+        .stage3 {
+            .headline {
+                font-size: 175% !important; // new
+            }
+
+
         }
     }
 }

@@ -25,22 +25,15 @@
 
 <script>
 import SectionEndTriangle from './SectionEndTriangle.vue'
-import ButtonComponent from './ButtonComponent.vue';
 import HomeAboutMeDialog from './HomeAboutMeDialog.vue';
 
 
 
 export default {
     name: "HomeAboutMe",
-    components: { SectionEndTriangle, ButtonComponent, HomeAboutMeDialog },
+    components: { SectionEndTriangle, HomeAboutMeDialog },
     data: function () {
-        const buttonInfo = {
-            class: "primary_color",
-            text: "Mehr über mich...",
-            block: true,
-        }
         return {
-            buttonInfo,
         };
     },
     computed: {

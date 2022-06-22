@@ -15,7 +15,7 @@
                         duo
                         dolores
                     </div>
-                    <ButtonComponent v-bind:buttonInfo="buttonInfo" />
+                    <HomeAboutMeDialog />
                 </div>
             </div>
         </div>
@@ -26,12 +26,13 @@
 <script>
 import SectionEndTriangle from './SectionEndTriangle.vue'
 import ButtonComponent from './ButtonComponent.vue';
+import HomeAboutMeDialog from './HomeAboutMeDialog.vue';
 
 
 
 export default {
     name: "HomeAboutMe",
-    components: { SectionEndTriangle, ButtonComponent },
+    components: { SectionEndTriangle, ButtonComponent, HomeAboutMeDialog },
     data: function () {
         const buttonInfo = {
             class: "primary_color",

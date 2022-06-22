@@ -1,6 +1,6 @@
 <template>
     <div class="button">
-        <v-btn block :class="buttonInfo.class" :size="buttonInfo.size" rounded>
+        <v-btn :block="buttonInfo.block ? true : false" :class="buttonInfo.class" :size="buttonInfo.size" rounded @click="this.$emit('clicked')">
             {{ buttonInfo.text }}
         </v-btn>
     </div>

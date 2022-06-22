@@ -23,7 +23,7 @@ export default {
 $triangle_height: 4rem;
 
 .triangle {
-    width: 100vw;
+    width: 100%;
     margin-top: -2px;
     height: 0;
     border-style: solid;

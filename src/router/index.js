@@ -9,10 +9,11 @@ const routes = [
     component: HomeView
   },
   {
-    path: '/',
+    path: '/cv',
     name: 'cv',
     component: CVView
-  }
+  },
+  
 ]
 
 const router = createRouter({

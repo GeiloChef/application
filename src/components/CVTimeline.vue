@@ -1,9 +1,7 @@
 <template>
     <div class="cvtimeline primary_color">
         <div class="content flex">
-
-            <CVSlider />
-
+                <CVSlider />
         </div>
     </div>
 </template>

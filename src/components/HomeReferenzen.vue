@@ -3,8 +3,6 @@
         <div class="content" :class="displayBreakpointName">
             <div class="content flex" :class="displayBreakpointName">
                 <h3 class="text-headline">Meine Referenzen</h3>
-                <span class="text">Außer dieser Webapp kann ich natürlich noch weitere umgesetzte Projekte sowie
-                    Arbeitszeugnisse und Zertifikate nachweisen.</span>
                 <HomeReferenzenSlider />
             </div>
             <SectionEndTriangle class="primary_color" />
@@ -17,9 +15,12 @@ import HomeReferenzenSlider from './HomeReferenzenSlider.vue'
 export default {
     name: "HomeReferenzen",
     data: function () {
-        return {};
+        return {
+        };
     },
-    components: { HomeReferenzenSlider },
+    components: {
+        HomeReferenzenSlider,
+    },
     computed: {
         displayBreakpointName() { return (this.$vuetify.display.name) }
     },
@@ -36,8 +37,8 @@ export default {
     }
 }
 
-.content.xs{
-    .text{
+.content.xs {
+    .text {
         font-size: 150%
     }
 }

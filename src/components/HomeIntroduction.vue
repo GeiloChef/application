@@ -6,66 +6,24 @@
         </div>
         <div class="introText flex">
             <!-- Stage 0 - Einleitung -->
-            <div class="wrapper stage0" v-if="!stages[0].hidden" :class="[(stages[0].status ? '' : 'moveToLeft')]">
-                <div class="s0 e0 headline fadeIn">
-                    <span>Herzlich Willkommen</span>
-                </div>
-                <div class="s0 e1 subtitle fadeIn">
-                    <span>Vielen Dank, dass Sie sich meine interaktive Bewerbung ansehen.</span>
-                </div>
-                <div class="s0 e2 subtitle fadeIn">
-                    <span>Bevor Sie die Webseite frei durchstöbern können, erst ein kurzer Hinweis.</span>
-                </div>
-                <div class="s0 e3 subtitle fadeIn">
-                    <ButtonComponent @clicked="stageButtonClicked" v-bind:buttonInfo="stages[0].buttonInfo" />
-                </div>
-            </div>
-            <!-- Stage 1 Erklärung -->
-            <div class="wrapper stage1" v-if="!stages[1].hidden" :class="[(stages[1].status ? '' : 'moveToLeft')]">
-                <div class="s1 e0 subtitle fadeIn">
-                    <span>Auf dieser Seite finden Sie alle relevanten Informationen zu meiner Person.</span>
-                </div>
-                <div class="s1 e1 subtitle fadeIn">
-                    <span>Natürlich werde ich auch gleich erläutern, warum ich mich bei ... ... beworben habe.</span>
-                </div>
-                <div class="s1 e2 subtitle fadeIn">
-                    <ButtonComponent @clicked="stageButtonClicked" v-bind:buttonInfo="stages[1].buttonInfo" />
-                </div>
-            </div>
-            <!-- Stage 2 Erklärung 1 -->
-            <div class="wrapper stage2" v-if="!stages[2].hidden" :class="[(stages[2].status ? '' : 'moveToLeft')]">
-                <div class="s2 e0 subtitle fadeIn">
-                    <span>Über den Button in der unteren rechten Ecke können Sie jederzeit alle wichtigen Dateien rund
-                        um meine Bewerbung einsehen und herunterladen.</span>
-                </div>
-                <div class="s2 e2 subtitle fadeIn">
-                    <span>Sobald Sie nun auf fortfahren, können Sie alle Informationen über mich durch weiterscrollen
-                        erreichen.</span>
-                </div>
-                <div class="s2 e3 subtitle fadeIn">
-                    <ButtonComponent @clicked="stageButtonClicked" v-bind:buttonInfo="stages[2].buttonInfo" />
-                </div>
-            </div>
-            <!-- Stage 3 - finale Ansicht -->
-            <div class="wrapper stage3" v-if="!stages[3].hidden" :class="[(stages[3].status ? '' : 'moveToLeft')]">
-                <div class="s3 e0 headline fadeIn">
-                    <span>Warum ich mich bei ... ... beworben habe</span>
-                </div>
-                <div class="s3 e1 subtitle">
-                    <p class="fadeIn">Lorem ipsum dolor sit amet, sadipscing elitr, sed diam nonumy eirmod
-                        tempor</p>
-                    <p class="fadeIn">invidunt ut labore et dolore aliquyam erat, sed diam voluptua. At vero
-                        eos et accusam et</p>
-                    <p class="fadeIn">justo duo dolores et ea rebum. clita kasd , no sea takimata
-                        sanctus est Lorem</p>
-                    <p class="fadeIn">ipsum dolor sit amet. Lorem dolor sit amet, sadipscing elitr,
-                        sed diam nonumy</p>
-                    <p class="fadeIn">eirmod tempor ut labore et magna aliquyam erat, sed diam
-                        voluptua. At vero eos</p>
-                    <p class="fadeIn">et accusam et justo duo et ea rebum. Stet clita kasd gubergren, no sea
-                        takimata sanctus</p>
-
-                    <div class="scrollInfo moveFromBottom">Scrollen zum fortfahren...</div>
+            <div v-for="stage in stages" v-bind:key="stage.id">
+                <div class="wrapper" v-if="!stage.hidden" :class="[(stage.status ? '' : 'moveToLeft')]">
+                    <div class="e0 animate subtitle fadeIn" v-if="stage.attributes.element0" :class="'s' + (stage.id - 1)">
+                        <span>{{ stage.attributes.element0 }}</span>
+                    </div>
+                    <div class="e1 animate subtitle fadeIn" v-if="stage.attributes.element1" :class="'s' + (stage.id - 1)">
+                        <span>{{ stage.attributes.element1 }}</span>
+                    </div>
+                    <div class="e2 animate subtitle fadeIn" v-if="stage.attributes.element2" :class="'s' + (stage.id - 1)">
+                        <span>{{ stage.attributes.element2 }}</span>
+                    </div>
+                    <div class="e2 animate subtitle fadeIn" v-if="stage.attributes.element3" :class="'s' + (stage.id - 1)">
+                        <span>{{ stage.attributes.element3 }}</span>
+                    </div>
+                    <div class="e4 animate subtitle fadeIn" v-if="stage.attributes.buttoninfo" :class="'s' + (stage.id - 1)">
+                        <ButtonComponent @clicked="stageButtonClicked"
+                            v-bind:buttonInfo="stage.attributes.buttoninfo" />
+                    </div>
                 </div>
             </div>
         </div>
@@ -73,53 +31,13 @@
 </template>
 
 <script>
+import strapiService from '@/services/strapi.service';
 import ButtonComponent from './ButtonComponent.vue'
 export default {
     name: "HomeIntroduction",
     components: { ButtonComponent },
     data: () => {
-        let stages = [
-            //stage 0
-            {
-                status: true,
-                hidden: false,
-                buttonInfo: {
-                    class: "secondary_color",
-                    text: "Jetzt Starten!",
-                    size: "x-large",
-                }
-            },
-            //stage 1
-            {
-                status: false,
-                hidden: true,
-                buttonInfo: {
-                    class: "secondary_color",
-                    text: "weiter...",
-                    size: "x-large",
-                }
-            },
-            //stage 2
-            {
-                status: false,
-                hidden: true,
-                buttonInfo: {
-                    class: "secondary_color",
-                    text: "Verstanden, Los gehts",
-                    size: "x-large",
-                }
-            },
-            //stage 3
-            {
-                status: false,
-                hidden: true,
-                buttonInfo: {
-                    class: "secondary_color",
-                    text: "Verstanden, Los gehts",
-                    size: "x-large",
-                }
-            },
-        ]
+        let stages = [];
 
         return {
             skipIntroText: "Intro überspringen...",
@@ -176,8 +94,18 @@ export default {
     computed: {
         displayBreakpointName() { return (this.$vuetify.display.name) }
     },
-    mounted() {
-        console.log(this.$parent)
+    created() {
+        strapiService.getData('introduction-stages').then(response => {
+            this.stages = response.data.map(stage => {
+                stage.status = false;
+                stage.hidden = true;
+                return stage;
+            });
+            // make stage 1 visible
+            this.stages[0].status = true;
+            this.stages[0].hidden = false;
+            console.log(this.stages);
+        })
     }
 }
 </script>
@@ -209,6 +137,15 @@ export default {
 
     .wrapper {
         width: 100%;
+        $initialDelayStages: 0.4s;
+        $interval: 0.8s;
+
+        @for $i from 1 to 10 {
+            div.animate:nth-child(#{$i}) {
+                opacity: 0;
+                animation-delay: ($interval * $i) + $initialDelayStages;
+            }
+        }
     }
 
     .introText {
@@ -228,27 +165,6 @@ export default {
 
         .subtitle {
             margin: 1rem 0
-        }
-
-        .e0 {
-            opacity: 0;
-            animation-delay: 0.4s
-        }
-
-        .e1 {
-            opacity: 0;
-            animation-delay: 1.7s;
-        }
-
-        .e2 {
-            opacity: 0;
-            margin-bottom: 2rem;
-            animation-delay: 3s;
-        }
-
-        .e3 {
-            opacity: 0;
-            animation-delay: 4.3s;
         }
 
         .stage3 {

@@ -19,11 +19,8 @@ export default {
     data: function () {
         return {
             links: [
-                'Home',
-                'Lebenslauf',
-                'Tech Stack',
-                'Referenzen',
-                'Downloads',
+                'Impressum',
+                'Datenschutz'
             ],
         }
     },

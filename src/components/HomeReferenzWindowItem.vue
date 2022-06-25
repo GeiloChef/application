@@ -1,23 +1,23 @@
 <template>
     <div class="referenzWindowItem flex">
-        <v-card height="300" class="d-flex justify-center align-center referenzWindowItemCard">
+        <v-card height="450" class="d-flex justify-center align-center referenzWindowItemCard">
             <div class="referenz-display">
                 <v-card-title>
-                    <span class="headline">{{ referenz.title }}</span>
+                    <span class="headline">{{ reference.title }}</span>
                 </v-card-title>
                 <v-card-subtitle>
                     <span class="subtitle">
-                        {{ referenz.subtitle }}
+                        {{ reference.subtitle }}
                     </span>
                 </v-card-subtitle>
                 <v-card-text>
                     <span class="text">
-                        {{ referenz.text }}
+                        {{ reference.summary }}
                     </span>
                 </v-card-text>
                 <v-card-actions>
-                    <v-btn v-for="link in referenz.links" v-bind:key="link.href" class="primary_color action_btn" size="small" rounded>
-                        {{ link.name }}
+                    <v-btn v-for="link in reference.links.data" v-bind:key="link.attributes.href" class="primary_color action_btn" size="small" rounded>
+                        {{ link.attributes.displayedName }}
                     </v-btn>
                 </v-card-actions>
             </div>
@@ -34,15 +34,24 @@ export default {
         };
     },
     props: {
-        referenz: Object,
+        reference: Object,
     },
+    mounted(){
+        console.log(this.reference);
+    }
 }
 </script>
 
 <style lang="scss" scoped>
 @import "@/assets/variables.scss";
+.referenzWindowItem{
+    height: 450px;
+    max-height: 450px;
+    min-height: 450px;
+}
 
 .referenzWindowItemCard {
+    position: relative;
     padding: 5%;
     width: 100%;
 }

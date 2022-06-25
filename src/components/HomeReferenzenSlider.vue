@@ -2,17 +2,18 @@
     <div class="homeReferenzenSlider">
         <v-card theme="dark">
             <v-card theme="dark">
-                <v-window v-model="onboarding">
-                    <v-window-item v-for="referenz in referenzen" v-bind:key="referenz.id" v-bind:referenz="referenz">
-                        <HomeReferenzWindowItem v-bind:key="referenz.id" v-bind:referenz="referenz" />
+                <v-window v-model="onboarding" class="referenceWindowParent">
+                    <v-window-item v-for="reference in references" v-bind:key="reference.id"
+                        v-bind:reference="reference" >
+                        <HomeReferenzWindowItem v-bind:key="reference.id" v-bind:reference="reference.attributes" />
                     </v-window-item>
                 </v-window>
 
                 <v-card-actions class="justify-space-between">
                     <v-btn variant="plain" icon="mdi-chevron-left" @click="prev"></v-btn>
                     <v-item-group v-model="onboarding" class="text-center" mandatory>
-                        <v-item v-for="referenz in referenzen" v-bind:key="referenz.id" v-slot="{ isSelected, toggle }"
-                            :value="n">
+                        <v-item v-for="reference in references" v-bind:key="reference.id"
+                            v-slot="{ isSelected, toggle }" :value="n">
                             <v-btn :variant="isSelected ? 'outlined' : 'text'" icon="mdi-record" @click="toggle">
                             </v-btn>
                         </v-item>
@@ -22,16 +23,17 @@
 
             </v-card>
             <div class="flex selector">
-                <v-chip-group v-model="amenities" column multiple color-active="primary_color">
-                    <v-chip filter outlined>
-                        Projekte
+                <v-chip-group v-model="selected" column mandatory multiple color-active="primary_color">
+                    <v-chip v-for="reference_type in selection" :key="reference_type.value"
+                        :value="reference_type.value" filter outlined @click="showType()">
+                        {{ reference_type.displayedName }}
                     </v-chip>
-                    <v-chip filter outlined>
+                    <!-- <v-chip filter outlined @click="showType('school')">
                         Zertifikate
                     </v-chip>
-                    <v-chip filter outlined>
+                    <v-chip filter outlined @click="showType('work')">
                         Arbeitszeugnisse
-                    </v-chip>
+                    </v-chip> -->
                 </v-chip-group>
             </div>
         </v-card>
@@ -39,78 +41,63 @@
 </template>
 
 <script>
+import strapiService from '@/services/strapi.service';
 import HomeReferenzWindowItem from './HomeReferenzWindowItem.vue'
 export default {
     name: "HomeReferenzenSlider",
+    components: { HomeReferenzWindowItem },
     data: function () {
-        let referenzen = [
-            {
-                id: 1,
-                title: "Chat App",
-                subtitle: "Eine Live Chat App",
-                text: "Live Chat App mit Node.js (Express & Socket.io) im Backend und Vue im Frontend.",
-                info: "Work in Progress",
-                type: "project",
-                links: [
-                    {
-                        name: "Github",
-                        href: "www.github.de",
-                    },
-                    {
-                        name: "Zur Chat App",
-                        href: "chat.0of.de"
-                    }
-                ]
-            },
-            {
-                id: 2,
-                title: "Chat App",
-                text: "Live Chat App mit Node.js (Express & Socket.io) im Backend und Vue im Frontend.",
-                info: "Work in Progress",
-                type: "project",
-                links: [
-                    {
-                        name: "Github",
-                        href: "www.github.de",
-                    },
-                    {
-                        name: "Zur Chat App",
-                        href: "chat.0of.de"
-                    }
-                ]
-            },
-            {
-                id: 3,
-                title: "Chat App",
-                text: "Live Chat App mit Node.js (Express & Socket.io) im Backend und Vue im Frontend.",
-                info: "Work in Progress",
-                type: "project",
-                links: [
-                    {
-                        name: "Github",
-                        href: "www.github.de",
-                    },
-                    {
-                        name: "Zur Chat App",
-                        href: "chat.0of.de"
-                    }
-                ]
-            },
-        ];
+        let selection = [
+            { displayedName: "Projekte", value: "code" },
+            { displayedName: "Arbeitszeugnisse", value: "work" },
+            { displayedName: "Zertifikate", value: "school" },
+        ]
         return {
-            referenzen,
+            selection,
+            selected: ["code", "work", "school"],
+            references: [],
+            referencesData: [],
             onboarding: 0,
         };
     },
     methods: {
         next() {
-            this.onboarding = this.onboarding + 1 > this.referenzen.length - 1 ? 0 : this.onboarding + 1;
+            this.onboarding = this.onboarding + 1 > this.references.length - 1 ? 0 : this.onboarding + 1;
         },
         prev() {
-            this.onboarding = this.onboarding - 1 < 0 ? this.referenzen.length - 1 : this.onboarding - 1;
+            this.onboarding = this.onboarding - 1 < 0 ? this.references.length - 1 : this.onboarding - 1;
         },
+        showType() {
+            this.references = this.referencesData.filter(item => {
+                 for (let type of this.selected) {
+                    if (item.attributes.type === type) {
+                        return item;
+                    }
+                }
+            })
+
+        }
     },
-    components: { HomeReferenzWindowItem }
+    created() {
+        strapiService.getData('references').then(response => {
+            // console.log(response);
+            // split references depending on their type
+            // let possibleTypes = ['code', 'school', "work"];
+            // response.data.map(item => {
+            //     for(let type of possibleTypes){
+            //         if(item.attributes.type === type){
+            //             this.references[type].push(item);
+            //             break;
+            //         }
+            //     }
+            // });
+            this.references = response.data;
+            this.referencesData = response.data;
+            // this.onboarding = this.references.length;
+
+            // console.log(this.references);
+        })
+    }
 }
 </script>
 
@@ -123,7 +110,13 @@ export default {
     overflow: hidden;
 }
 
+.referenceWindowParent{
+    height: 450px;
+    max-height: 450px;
+}
+
 .selector {
     background-color: #000000;
 }
+
 </style>

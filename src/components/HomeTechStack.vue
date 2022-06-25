@@ -53,7 +53,7 @@ export default {
     },
     created() {
         strapiService.getData('techstacks').then(response => {
-            console.log(response);
+            // console.log(response);
             this.techstackItems = response.data;
             this.techstackShownNumber = this.techstackDefaultShownNumber;
             for (let i = 0; i < this.techstackShownNumber; i++) {

@@ -2,6 +2,7 @@
   <v-app :class="displayBreakpointName">
     <v-main>
       <router-view></router-view>
+      <DownloadDialog />
     </v-main>
     <FooterComponent />
   </v-app>
@@ -9,11 +10,12 @@
 </template>
 
 <script>
-
+import DownloadDialog from './components/DownloadDialog.vue';
 import FooterComponent from './components/FooterComponent.vue';
+
 export default {
   name: "AppView",
-  components: { FooterComponent },
+  components: { FooterComponent, DownloadDialog },
   data: () => {
     return{
       defaultInformation: "",

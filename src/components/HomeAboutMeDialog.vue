@@ -1,13 +1,12 @@
 <template>
     <v-dialog transition="dialog-bottom-transition">
         <template v-slot:activator="{ props }">
-            <ButtonComponent v-bind="props" v-bind:buttonInfo="buttonInfo"/>
+            <ButtonComponent v-bind="props" v-bind:buttonInfo="buttonInfo" />
         </template>
         <template v-slot:default="{ isActive }">
             <v-card>
-                <v-toolbar class="primary_color">Eine kurze Einleitung über mich...</v-toolbar>
+                <v-toolbar class="primary_color">Etwas mehr Informationen über mich.</v-toolbar>
                 <v-card-text class="secondary_color">
-                    <div class="text-h2 pa-12">Hello world!</div>
                 </v-card-text>
                 <v-card-actions class="secondary_color justify-end">
                     <v-btn text @click="isActive.value = false">Schließen</v-btn>
@@ -26,17 +25,16 @@ export default {
             text: "Mehr über mich...",
             block: true,
         }
-        return{
+        return {
             buttonInfo
         }
     },
     components: {
-        ButtonComponent,
-    }
+    ButtonComponent,
+}
 }
 </script>
 
 <style lang="scss" scoped>
 @import "@/assets/variables.scss";
-
 </style>

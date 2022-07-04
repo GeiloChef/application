@@ -10,6 +10,16 @@ class StrapiAPI {
                 return data;
             });
     }
+
+    async login(dataObject) {
+        return fetch(API_URL + 'auth/local', {
+            method: 'POST',
+            body: new URLSearchParams(dataObject)
+        }).then(response => response.json())
+            .then(data => {
+                return data;
+            })
+    }
 }
 
 export default new StrapiAPI();

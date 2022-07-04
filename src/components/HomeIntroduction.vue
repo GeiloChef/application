@@ -8,19 +8,24 @@
             <!-- Stage 0 - Einleitung -->
             <div v-for="stage in stages" v-bind:key="stage.id">
                 <div class="wrapper" v-if="!stage.hidden" :class="[(stage.status ? '' : 'moveToLeft')]">
-                    <div class="e0 animate subtitle fadeIn" v-if="stage.attributes.element0" :class="'s' + (stage.id - 1)">
-                        <span>{{ stage.attributes.element0 }}</span>
+                    <div class="e0 animate subtitle fadeIn" v-if="stage.attributes.element0"
+                        :class="'s' + (stage.id - 1)">
+                        <span v-html="stage.attributes.element0"></span>
                     </div>
-                    <div class="e1 animate subtitle fadeIn" v-if="stage.attributes.element1" :class="'s' + (stage.id - 1)">
-                        <span>{{ stage.attributes.element1 }}</span>
+                    <div class="e1 animate subtitle fadeIn" v-if="stage.attributes.element1"
+                        :class="'s' + (stage.id - 1)">
+                        <span v-html="stage.attributes.element1"></span>
                     </div>
-                    <div class="e2 animate subtitle fadeIn" v-if="stage.attributes.element2" :class="'s' + (stage.id - 1)">
-                        <span>{{ stage.attributes.element2 }}</span>
+                    <div class="e2 animate subtitle fadeIn" v-if="stage.attributes.element2"
+                        :class="'s' + (stage.id - 1)">
+                        <span v-html="stage.attributes.element2"></span>
                     </div>
-                    <div class="e2 animate subtitle fadeIn" v-if="stage.attributes.element3" :class="'s' + (stage.id - 1)">
-                        <span>{{ stage.attributes.element3 }}</span>
+                    <div class="e2 animate subtitle fadeIn" v-if="stage.attributes.element3"
+                        :class="'s' + (stage.id - 1)">
+                        <span v-html="stage.attributes.element3"></span>
                     </div>
-                    <div class="e4 animate subtitle fadeIn" v-if="stage.attributes.buttoninfo" :class="'s' + (stage.id - 1)">
+                    <div class="e4 animate subtitle fadeIn" v-if="stage.attributes.buttoninfo"
+                        :class="'s' + (stage.id - 1)">
                         <ButtonComponent @clicked="stageButtonClicked"
                             v-bind:buttonInfo="stage.attributes.buttoninfo" />
                     </div>
@@ -41,8 +46,11 @@ export default {
 
         return {
             skipIntroText: "Intro überspringen...",
+            salution: "",
+            userbasedContent: "",
             currentStage: 0,
-            stages
+            stages,
+
         };
     },
     methods: {
@@ -89,18 +97,49 @@ export default {
                     this.skipIntroText = "Intro nochmals ansehen";
                 }
             }
+        },
+        addCompanyName(string) {
+            let formattedCompanyName = `<i>${this.userbasedContent.Firma}</i>`
+            return string.replace('%FIRMA%', formattedCompanyName);
         }
     },
     computed: {
         displayBreakpointName() { return (this.$vuetify.display.name) }
     },
     created() {
+        // set userbaded Content
+        this.userbasedContent = JSON.parse(window.localStorage.getItem("userbasedContent"));
+        console.log(this.userbasedContent);
+        if (window.localStorage.getItem("salution")) {
+            this.salution = window.localStorage.getItem("salution");
+        }
+        //TODO: wenn das nicht gesetzt ist, muss nochmal auf Login verwiesen werden
         strapiService.getData('introduction-stages').then(response => {
             this.stages = response.data.map(stage => {
                 stage.status = false;
                 stage.hidden = true;
+                // change displayed text
+                switch (this.salution) {
+                    case "formal":
+                        stage.attributes.element0 = this.addCompanyName(stage.attributes.element0_formal)
+                        stage.attributes.element1 = stage.attributes.element1_formal
+                        stage.attributes.element2 = stage.attributes.element2_formal
+                        stage.attributes.element3 = stage.attributes.element3_formal
+                        break;
+                    case "personal":
+                        stage.attributes.element0 = stage.attributes.element0_personal
+                        stage.attributes.element1 = stage.attributes.element1_personal
+                        stage.attributes.element2 = stage.attributes.element2_personal
+                        stage.attributes.element3 = stage.attributes.element3_personal
+                        break;
+                    default:
+                        break;
+                }
                 return stage;
             });
+            // add the personal Information
+            this.stages[this.stages.length - 1].attributes.element1 = this.userbasedContent.reasonForApplication
+
             // make stage 1 visible
             this.stages[0].status = true;
             this.stages[0].hidden = false;

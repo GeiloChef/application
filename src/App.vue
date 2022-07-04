@@ -1,7 +1,10 @@
 <template>
   <v-app :class="displayBreakpointName">
     <v-main>
-      <router-view></router-view>
+      <v-scroll-x-transition>
+        <router-view @setUserbasedContent="setUserbasedContent" v-bind:userBasedContent="userBasedContent">
+        </router-view>
+      </v-scroll-x-transition>
       <DownloadDialog />
     </v-main>
     <FooterComponent />
@@ -17,17 +20,26 @@ export default {
   name: "AppView",
   components: { FooterComponent, DownloadDialog },
   data: () => {
-    return{
-      defaultInformation: "",
+    return {
+      userBasedContent: new Object,
+    }
+  },
+  methods: {
+    setUserbasedContent(content) {
+      console.log(content);
+      this.$cookies.set("jwt", content.jwt);
+      this.$cookies.set("logged-in", "true");
+      this.userBasedContent = content.user
     }
   },
   computed: {
     displayBreakpointName() { return (this.$vuetify.display.name) }
   },
-  created(){
+  created() {
   }
 }
 </script>
+
 
 <style lang="scss">
 @import "@/assets/variables.scss";
@@ -37,7 +49,7 @@ body {
   background-color: $secondary_color;
 }
 
-.xs{
+.xs {
   overflow: hidden;
 }
 </style>

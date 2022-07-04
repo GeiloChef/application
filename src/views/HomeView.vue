@@ -43,6 +43,10 @@ export default {
 }
 </script>
 
+<style lang="scss">
+
+</style>
+
 <style lang="scss" scoped>
 .fixed {
   height: 100vh;

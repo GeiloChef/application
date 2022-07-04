@@ -11,9 +11,7 @@
                     </span>
                 </v-card-subtitle>
                 <v-card-text>
-                    <span class="text">
-                        {{ reference.summary }}
-                    </span>
+                    <span class="text" v-html="reference.summary"></span>
                 </v-card-text>
                 <v-card-actions>
                     <v-btn v-for="link in reference.links.data" v-bind:key="link.attributes.href" class="primary_color action_btn" size="small" rounded>

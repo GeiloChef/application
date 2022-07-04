@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div ref="footer">
         <v-footer color="black">
             <v-row justify="center" class="footer" no-gutters>
                 <v-btn v-for="link in links" :key="link" variant="text" class="mx-2" rounded="xl">

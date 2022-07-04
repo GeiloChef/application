@@ -13,10 +13,13 @@
     "roboto-fontface": "*",
     "sass": "^1.52.3",
     "sass-loader": "^13.0.0",
+    "vee-validate": "^4.5.11",
     "vue": "^3.2.13",
+    "vue-cookies": "^1.8.1",
     "vue-router": "^4.0.3",
     "vuetify": "npm:@vuetify/nightly@next",
-    "webfontloader": "^1.0.0"
+    "webfontloader": "^1.0.0",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",

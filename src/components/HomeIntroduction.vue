@@ -4,9 +4,13 @@
         <div class="skipIntro" @click="skipIntro">
             <span>{{ skipIntroText }}</span>
         </div>
+        <!-- Scroll Info -->
+        <div class="scrollInfo fadeIn" v-if="currentStage + 1 === stages.length">
+            <span>Scrollen um mehr zu erfahren...</span>
+        </div>
         <div class="introText flex">
             <!-- Stage 0 - Einleitung -->
-            <div v-for="stage in stages" v-bind:key="stage.id">
+            <div v-for="stage in stages" v-bind:key="stage.id" :class="'stage' + (stage.id - 1)">
                 <div class="wrapper" v-if="!stage.hidden" :class="[(stage.status ? '' : 'moveToLeft')]">
                     <div class="e0 animate subtitle fadeIn" v-if="stage.attributes.element0"
                         :class="'s' + (stage.id - 1)">
@@ -62,8 +66,13 @@ export default {
                 this.stages[index + 1].hidden = false;
                 this.stages[index + 1].status = true;
             }, 700);
-            console.log(this.currentStage);
-            console.log(this.stages.length - 2)
+
+            // make download button visible
+            if(this.currentStage === 1){
+                this.$parent.$emit('showDownloadButton');
+            }
+
+            // enable full website
             if (this.currentStage >= (this.stages.length - 2)) {
                 this.enableFullWebsite();
                 this.skipIntroText = "Intro nochmals ansehen";
@@ -153,11 +162,21 @@ export default {
 // for variables and animations
 @import "@/assets/variables.scss";
 
-
+$initialDelay: 1s;
+$stage3delay: 0.4s;
 
 .homeIntro {
     height: 100%;
     position: relative;
+
+    .scrollInfo {
+        position: absolute;
+        width: 100%;
+        text-align: center;
+        bottom: -5rem;
+        opacity: 0;
+        animation-delay: ($stage3delay * 6) + $initialDelay + 1s;
+    }
 
     .skipIntro {
         cursor: pointer;
@@ -207,32 +226,26 @@ export default {
         }
 
         .stage3 {
-            $initialDelay: 1s;
-            $stage3delay: 0.4s;
+            margin-top: 2rem;
 
             .subtitle {
                 opacity: 1;
 
-                p {
+                span {
                     max-width: 100%;
-                    font-size: 75%;
-                }
+                    font-size: 1.5vw;
 
-                .scrollInfo {
-                    position: absolute;
-                    width: 100%;
-                    text-align: center;
-                    bottom: 0;
-                    opacity: 0;
-                    animation-delay: ($stage3delay * 6) + $initialDelay + 1s;
-                }
-
-                @for $i from 1 to 7 {
-                    p:nth-child(#{$i}) {
-                        opacity: 0;
-                        animation-delay: ($stage3delay * $i) + $initialDelay;
+                    @for $i from 1 to 7 {
+                        p:nth-child(#{$i}) {
+                            animation-name: fadeIn;
+                            animation-duration: 1s;
+                            animation-fill-mode: forwards;
+                            opacity: 0;
+                            animation-delay: ($stage3delay * $i) + $initialDelay;
+                        }
                     }
                 }
+
             }
         }
     }

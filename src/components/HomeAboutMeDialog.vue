@@ -26,7 +26,7 @@ export default {
     data: () => {
         const buttonInfo = {
             class: "primary_color",
-            text: "Mehr über mich...",
+            text: "weiterlesen",
             block: true,
         }
         return {

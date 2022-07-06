@@ -3,8 +3,8 @@
         <v-fade-transition>
             <v-dialog>
                 <template v-slot:activator="{ props }">
-                    <div class="button">
-                        <v-btn v-bind="props" color="success" icon="mdi-domain" size="x-large"
+                    <div class="button moveDownloadButton">
+                        <v-btn v-bind="props" color="success" icon="mdi-download" size="x-large"
                             :elevation="isHovering ? 12 : 2"></v-btn>
                     </div>
                 </template>
@@ -37,10 +37,29 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@keyframes moveDownloadButton {
+    0% {
+        bottom: -15vh;
+        visibility: hidden;
+    }
+
+    100% {
+        bottom: 5vh;
+        visibility: visible;
+    }
+}
+
+.moveDownloadButton {
+    bottom: -15vh;
+    animation-name: moveDownloadButton;
+    animation-duration: 1.6s;
+    animation-delay: 1s;
+    animation-fill-mode: forwards;
+}
+
 .downloadDialog {
     .button {
         position: fixed;
-        bottom: 5vh;
         right: 5vh;
 
         .v-btn {

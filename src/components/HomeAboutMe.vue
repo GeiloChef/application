@@ -7,13 +7,7 @@
             <div class="col flex" :class="displayBreakpointName">
                 <div class="text-parent">
                     <h3 class="text-headline">Über mich</h3>
-                    <div class="text">
-                        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt
-                        ut
-                        labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo
-                        dolores labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo
-                        duo
-                        dolores
+                    <div class="text" v-html="aboutMeShort">
                     </div>
                     <HomeAboutMeDialog />
                 </div>
@@ -26,6 +20,7 @@
 <script>
 import SectionEndTriangle from './SectionEndTriangle.vue'
 import HomeAboutMeDialog from './HomeAboutMeDialog.vue';
+import strapiService from '@/services/strapi.service';
 
 
 
@@ -34,10 +29,40 @@ export default {
     components: { SectionEndTriangle, HomeAboutMeDialog },
     data: function () {
         return {
+            aboutMeShort: "",
         };
     },
     computed: {
-        displayBreakpointName() { return (this.$vuetify.display.name) }
+        displayBreakpointName() { return (this.$vuetify.display.name) },
+    },
+    methods: {
+        editContent(string) {
+            let contentToEdit = [
+                {
+                    name: "%ALTER%",
+                    value: this.calculateAge(new Date("1997-05-13"))
+                },
+                {
+                    name: "%ERFAHRUNG%",
+                    value: this.calculateAge(new Date("2020-01-01"))
+                },
+            ]
+            for (let content of contentToEdit) {
+                string =  string.replace(content.name, content.value);
+            }
+            return string;
+        },
+        calculateAge(birthday) { // birthday is a date
+            let ageDifMs = Date.now() - birthday;
+            let ageDate = new Date(ageDifMs); // miliseconds from epoch
+            return Math.abs(ageDate.getUTCFullYear() - 1970);
+        }
+    },
+    created() {
+        strapiService.getData('aboutmeshort').then(response => {
+            console.log(response.data.attributes.aboutme);
+            this.aboutMeShort = this.editContent(response.data.attributes.aboutme);
+        });
     }
 }
 </script>

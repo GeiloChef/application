@@ -1,6 +1,6 @@
 <template>
   <div class="home" :class="viewFixed ? 'fixed' : ''">
-    <HomeHeader @enableFullWebsite="enableFullWebsite" />
+    <HomeHeader @enableFullWebsite="enableFullWebsite" @showDownloadButton="this.$parent.$emit('showDownloadButton')"  />
     <HomeAboutMe />
     <HomeCV />
     <HomeTechStack />

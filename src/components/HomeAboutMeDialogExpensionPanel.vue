@@ -30,7 +30,7 @@ export default {
             let contentToEdit = [
                 {
                     name: "%ALTER%",
-                    value: this.calculateAge("1997-05-13")
+                    value: this.calculateAge(new Date("1997-05-13"))
                 },
                 {
                     name: "%FIRMA%",
@@ -46,8 +46,8 @@ export default {
             }
         },
         calculateAge(birthday) { // birthday is a date
-            var ageDifMs = Date.now() - birthday;
-            var ageDate = new Date(ageDifMs); // miliseconds from epoch
+            let ageDifMs = Date.now() - birthday;
+            let ageDate = new Date(ageDifMs); // miliseconds from epoch
             return Math.abs(ageDate.getUTCFullYear() - 1970);
         }
     },

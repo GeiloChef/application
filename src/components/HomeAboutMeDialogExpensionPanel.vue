@@ -3,29 +3,10 @@
         <!-- <div class="text-subtitle-2 mb-2">With markup</div> -->
 
         <v-expansion-panels>
-            <v-expansion-panel v-for="category in downloadCategories" :key="category.id">
-                <v-expansion-panel-title class="primary_color">
-                    {{ category.attributes.displayedName }}
+            <v-expansion-panel v-for="category in aboutMeCategories" :key="category.id">
+                <v-expansion-panel-title class="primary_color" v-html="category.attributes.title">
                 </v-expansion-panel-title>
-                <v-expansion-panel-text class="primary_color">
-                    <!-- {{ category.attributes.shortDescription }} -->
-                    <v-expansion-panels>
-                        <v-expansion-panel v-for="download in category.attributes.downloads.data" :key="download.id">
-                            <v-expansion-panel-title class="secondary_color">
-                                {{ download.attributes.displayedName }}
-                            </v-expansion-panel-title>
-                            <v-expansion-panel-text class="secondary_color">
-                                {{ download.attributes.shortDescription }}
-                                <div class="actionButtons">
-                                    <v-btn v-for="link in download.attributes.links.data"
-                                        v-bind:key="link.attributes.href" class="primary_color action_btn" size="small"
-                                        rounded>
-                                        {{ link.attributes.displayedName }}
-                                    </v-btn>
-                                </div>
-                            </v-expansion-panel-text>
-                        </v-expansion-panel>
-                    </v-expansion-panels>
+                <v-expansion-panel-text class="primary_color" v-html="category.attributes.summary_displayed">
                 </v-expansion-panel-text>
             </v-expansion-panel>
         </v-expansion-panels>
@@ -39,16 +20,62 @@ export default {
     name: "DownloadDialogExpensionPanel",
     data: () => {
         return {
-            downloadCategories: "",
+            userbasedContent: "",
+            aboutMeCategories: "",
+            salution: "formal",
+        }
+    },
+    methods: {
+        editContent(string) {
+            let contentToEdit = [
+                {
+                    name: "%ALTER%",
+                    value: this.calculateAge("1997-05-13")
+                },
+                {
+                    name: "%FIRMA%",
+                    value: this.userbasedContent.Firma
+                },
+                {
+                    name: "%GEHALSTVORSTELLUNG%",
+                    value: this.userbasedContent.salary
+                },
+            ]
+            for (let content of contentToEdit) {
+                return string.replace(content.name, content.value);
+            }
+        },
+        calculateAge(birthday) { // birthday is a date
+            var ageDifMs = Date.now() - birthday;
+            var ageDate = new Date(ageDifMs); // miliseconds from epoch
+            return Math.abs(ageDate.getUTCFullYear() - 1970);
         }
     },
     created() {
-        let relations = "[downloads][populate][links][populate]"
-        strapiService.getData('download-categories', relations).then(response => {
-            console.log(response);
-            this.downloadCategories = response.data;
-
-        })
+        this.userbasedContent = JSON.parse(window.localStorage.getItem("userbasedContent"));
+        if (window.localStorage.getItem("salution")) {
+            this.salution = window.localStorage.getItem("salution");
+        }
+        let categories = new Array();
+        strapiService.getData('aboutmelongs').then(response => {
+            categories = response.data.map(category => {
+                if (category.attributes.text_id === "salary" && this.userbasedContent.salary && this.userbasedContent.salary) {
+                    category.attributes.show = false
+                } else {
+                    category.attributes.show = true
+                }
+                switch (this.salution) {
+                    case "formal":
+                        category.attributes.summary_displayed = this.editContent(category.attributes.summary_formal)
+                        break;
+                    case "personal":
+                        category.attributes.summary_displayed = this.editContent(category.attributes.summary_personal)
+                        break;
+                }
+                return category
+            });
+            this.aboutMeCategories = categories.filter(category => category.attributes.show === true);
+        });
     }
 }
 </script>
@@ -56,8 +83,17 @@ export default {
 <style lang="scss" scoped>
 @import "@/assets/variables.scss";
 
-.actionButtons{
-    .v-btn{
+
+.v-expansion-panel-text {
+    padding: 3%;
+    flex-wrap: wrap;
+    p{
+        width: 100%;
+    }
+}
+
+.actionButtons {
+    .v-btn {
         margin: .2rem
     }
 

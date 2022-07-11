@@ -14,7 +14,7 @@
                     <span class="text" v-html="reference.summary"></span>
                 </v-card-text>
                 <v-card-actions>
-                    <v-btn v-for="link in reference.links.data" v-bind:key="link.attributes.href" class="primary_color action_btn" size="small" rounded>
+                    <v-btn v-for="link in reference.links.data" v-bind:key="link.attributes.href" :href="link.attributes.href" target="_blank" class="primary_color action_btn" size="small" rounded>
                         {{ link.attributes.displayedName }}
                     </v-btn>
                 </v-card-actions>

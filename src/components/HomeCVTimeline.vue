@@ -59,7 +59,7 @@ export default {
                 date_from: "2021",
                 date_to: "2022",
                 title: "Wallable.de",
-                summary: "Erstellung und optimierung des Webshops über Prestashop für meine Selbständige Tätigkeit.",
+                summary: "Erstellung und Optimierung des Webshops über Prestashop für meine selbstständige Tätigkeit.",
                 shortSummary: "Erstellung Webshop"
             },
             {

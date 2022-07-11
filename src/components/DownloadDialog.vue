@@ -3,8 +3,8 @@
         <v-fade-transition>
             <v-dialog>
                 <template v-slot:activator="{ props }">
-                    <div class="button moveDownloadButton">
-                        <v-btn v-bind="props" color="success" icon="mdi-download" size="x-large"
+                    <div class="button moveDownloadButton" ref="downloadButton">
+                        <v-btn  v-bind="props" color="success" icon="mdi-download" size="x-large"
                             :elevation="isHovering ? 12 : 2"></v-btn>
                     </div>
                 </template>
@@ -32,7 +32,7 @@ export default {
     data: () => {
         return {};
     },
-    components: { DownloadDialogExpensionPanel }
+    components: { DownloadDialogExpensionPanel },
 }
 </script>
 
@@ -61,6 +61,7 @@ export default {
     .button {
         position: fixed;
         right: 5vh;
+        z-index: 2399;
 
         .v-btn {
             width: 12vh;

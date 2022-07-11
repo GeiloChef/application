@@ -3,7 +3,7 @@
         <v-footer color="black">
             <v-row justify="center" class="footer" no-gutters>
                 <v-btn v-for="link in links" :key="link" variant="text" class="mx-2" rounded="xl">
-                    {{ link }}
+                    <router-link :to="link.href" target='_blank'>{{ link.name }}</router-link>
                 </v-btn>
                 <v-col class="text-center text-white mt-4" cols="12">
                     {{ new Date().getFullYear() }} — <strong>Felix Dziatkowski</strong>
@@ -19,8 +19,14 @@ export default {
     data: function () {
         return {
             links: [
-                'Impressum',
-                'Datenschutz'
+                {
+                    name: 'Impressum',
+                    href: '/impress'
+                },
+                {
+                    name: 'Datenschutz',
+                    href: '/privacy-policy'
+                },
             ],
         }
     },
@@ -29,4 +35,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+a{
+    text-decoration: none;
+    color: white;
+}
 </style>

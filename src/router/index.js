@@ -2,6 +2,8 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import CVView from '../views/CVView.vue'
 import LoginView from '../views/LoginView.vue'
+import ImpressView from '../views/ImpressView.vue'
+import PrivacyPolicyView from '../views/PrivacyPolicyView.vue'
 
 // import jwt_decode from "jwt-decode";
 
@@ -21,7 +23,16 @@ const routes = [
     name: 'cv',
     component: CVView
   },
-
+  {
+    path: '/impress',
+    name: 'impress',
+    component: ImpressView
+  },
+  {
+    path: '/privacy-policy',
+    name: 'privacy-policy',
+    component: PrivacyPolicyView
+  }
 ];
 
 

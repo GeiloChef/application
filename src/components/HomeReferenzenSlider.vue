@@ -80,22 +80,8 @@ export default {
     },
     created() {
         strapiService.getData('references').then(response => {
-            // console.log(response);
-            // split references depending on their type
-            // let possibleTypes = ['code', 'school', "work"];
-            // response.data.map(item => {
-            //     for(let type of possibleTypes){
-            //         if(item.attributes.type === type){
-            //             this.references[type].push(item);
-            //             break;
-            //         }
-            //     }
-            // });
             this.references = response.data;
             this.referencesData = response.data;
-            // this.onboarding = this.references.length;
-
-            // console.log(this.references);
         })
     }
 }

@@ -68,7 +68,7 @@ export default {
             }, 700);
 
             // make download button visible
-            if(this.currentStage === 1){
+            if (this.currentStage === 1) {
                 this.$parent.$emit('showDownloadButton');
             }
 
@@ -81,6 +81,7 @@ export default {
         },
         enableFullWebsite() {
             this.$parent.$emit('enableFullWebsite');
+            window.localStorage.setItem("introDisabled", true);
         },
         skipIntro() {
             if (this.currentStage > (this.stages.length - 2)) {
@@ -108,8 +109,12 @@ export default {
             }
         },
         addCompanyName(string) {
-            let formattedCompanyName = `<i>${this.userbasedContent.Firma}</i>`
-            return string.replace('%FIRMA%', formattedCompanyName);
+            let formattedCompanyName = `<i>${this.userbasedContent.Firma}</i>`;
+            try {
+                return string.replace('%FIRMA%', formattedCompanyName)
+            } catch (error) {
+                return null;
+            }
         }
     },
     computed: {
@@ -122,7 +127,6 @@ export default {
         if (window.localStorage.getItem("salution")) {
             this.salution = window.localStorage.getItem("salution");
         }
-        //TODO: wenn das nicht gesetzt ist, muss nochmal auf Login verwiesen werden
         strapiService.getData('introduction-stages').then(response => {
             this.stages = response.data.map(stage => {
                 stage.status = false;
@@ -131,15 +135,15 @@ export default {
                 switch (this.salution) {
                     case "formal":
                         stage.attributes.element0 = this.addCompanyName(stage.attributes.element0_formal)
-                        stage.attributes.element1 = stage.attributes.element1_formal
-                        stage.attributes.element2 = stage.attributes.element2_formal
-                        stage.attributes.element3 = stage.attributes.element3_formal
+                        stage.attributes.element1 = this.addCompanyName(stage.attributes.element1_formal)
+                        stage.attributes.element2 = this.addCompanyName(stage.attributes.element2_formal)
+                        stage.attributes.element3 = this.addCompanyName(stage.attributes.element3_formal)
                         break;
                     case "personal":
-                        stage.attributes.element0 = stage.attributes.element0_personal
-                        stage.attributes.element1 = stage.attributes.element1_personal
-                        stage.attributes.element2 = stage.attributes.element2_personal
-                        stage.attributes.element3 = stage.attributes.element3_personal
+                        stage.attributes.element0 = this.addCompanyName(stage.attributes.element0_personal)
+                        stage.attributes.element1 = this.addCompanyName(stage.attributes.element1_personal)
+                        stage.attributes.element2 = this.addCompanyName(stage.attributes.element2_personal)
+                        stage.attributes.element3 = this.addCompanyName(stage.attributes.element3_personal)
                         break;
                     default:
                         break;
@@ -149,12 +153,19 @@ export default {
             // add the personal Information
             this.stages[this.stages.length - 1].attributes.element1 = this.userbasedContent.reasonForApplication
 
-            // make stage 1 visible
-            this.stages[0].status = true;
-            this.stages[0].hidden = false;
-            console.log(this.stages);
-        })
-    }
+            // Check if intro was shown once already
+            if (window.localStorage.getItem("introDisabled") === "true") {
+                // If so, skip the intro
+                console.log("Skip Intro")
+                this.skipIntro();
+            } else {
+                // otherwise make stage 1 visible
+                this.stages[0].status = true;
+                this.stages[0].hidden = false;
+                console.log(this.stages);
+            }
+        });
+    },
 }
 </script>
 

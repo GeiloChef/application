@@ -52,7 +52,7 @@ export default {
 .moveDownloadButton {
     bottom: -15vh;
     animation-name: moveDownloadButton;
-    animation-duration: 1.6s;
+    animation-duration: 2.4s;
     animation-delay: 1s;
     animation-fill-mode: forwards;
 }

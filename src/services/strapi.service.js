@@ -1,4 +1,4 @@
-const API_URL = process.env.VUE_APP_STRAPI_URL || "/";
+const API_URL = process.env.VUE_APP_STRAPI_URL || "https://strapi.bewerbung-von-felix.de/api/";
 
 class StrapiAPI {
     constructor() {

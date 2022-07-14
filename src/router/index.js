@@ -47,6 +47,9 @@ router.beforeEach((to, from, next) => {
    * Redirect a User if his JWT Token is not valid
    */
   if (to.name !== 'Login') {
+    if(to.name === 'impress' || to.name === 'privacy-policy'){
+      next();
+    }
     if (!window.localStorage.getItem("jwt") || !window.localStorage.getItem("userbasedContent")) {
       next({ 'name': 'Login' });
       return;

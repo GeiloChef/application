@@ -27,7 +27,7 @@ export default {
         displayBreakpointName() { return (this.$vuetify.display.name) }
     },
     created(){
-        const API_URL = process.env.VUE_APP_STRAPI_IMAGE_URL || "/";
+        const API_URL = process.env.VUE_APP_STRAPI_IMAGE_URL || "https://strapi.bewerbung-von-felix.de/";
         this.image = API_URL + this.item.displayedImage.data.attributes.url;
     }
 }

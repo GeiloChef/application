@@ -151,7 +151,17 @@ export default {
                 return stage;
             });
             // add the personal Information
-            this.stages[this.stages.length - 1].attributes.element1 = this.userbasedContent.reasonForApplication
+            switch (this.salution) {
+                case "formal":
+                    this.stages[this.stages.length - 1].attributes.element1 = this.userbasedContent.reasonForApplication_formal
+                    break;
+                case "personal":
+                    this.stages[this.stages.length - 1].attributes.element1 = this.userbasedContent.reasonForApplication_personal
+                    break;
+                default:
+                    break;
+            }
+
 
             // Check if intro was shown once already
             if (window.localStorage.getItem("introDisabled") === "true") {

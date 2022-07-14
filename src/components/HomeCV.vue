@@ -55,6 +55,7 @@ export default {
 }
 
 .buttonParent {
+    display: none;
     width: 40vw;
     margin-top: 3rem;
 }

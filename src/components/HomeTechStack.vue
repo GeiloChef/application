@@ -41,6 +41,11 @@ export default {
     },
     methods: {
         showFullStack() {
+            if(this.techstackItemsShown.length === this.techstackDefaultShownNumber){
+                this.buttonInfo.text = "Tech-Stack wieder einklappen";
+            }else{
+                this.buttonInfo.text = "Mein Kompletter Tech-Stack";
+            }
             this.techstackShownNumber = (this.techstackShownNumber === this.techstackDefaultShownNumber)
                 ? this.techstackItems.length
                 : this.techstackDefaultShownNumber

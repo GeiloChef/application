@@ -12,7 +12,7 @@
                     <Field name="identifier" type="text" value="" v-model="identifier" placeholder="Username" />
                 </div>
                 <div class="input-child flex">
-                    <Field name="password" type="text" value="" v-model="password" placeholder="Password" />
+                    <Field name="password" type="password" value="" v-model="password" placeholder="Password" />
 
                 </div>
                 <div class="errorParent flex">

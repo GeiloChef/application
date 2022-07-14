@@ -56,8 +56,8 @@ export default {
         return {
             schema,
             loading: false,
-            identifier: "henkelmax",
-            password: "Felix123",
+            identifier: "",
+            password: "",
         }
     },
     methods: {

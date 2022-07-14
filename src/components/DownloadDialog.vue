@@ -3,8 +3,8 @@
         <v-fade-transition>
             <v-dialog>
                 <template v-slot:activator="{ props }">
-                    <div class="button moveDownloadButton" ref="downloadButton">
-                        <v-btn  v-bind="props" color="success" icon="mdi-download" size="x-large"
+                    <div class="button moveDownloadButton" :class="displayBreakpointName" ref="downloadButton">
+                        <v-btn v-bind="props" :class="displayBreakpointName" color="success" icon="mdi-download" size="x-large"
                             :elevation="isHovering ? 12 : 2"></v-btn>
                     </div>
                 </template>
@@ -33,6 +33,9 @@ export default {
         return {};
     },
     components: { DownloadDialogExpensionPanel },
+    computed: {
+        displayBreakpointName() { return (this.$vuetify.display.name) }
+    },
 }
 </script>
 
@@ -63,9 +66,15 @@ export default {
         right: 5vh;
         z-index: 2399;
 
-        .v-btn {
+        .v-btn.md,
+        .v-btn.lg {
             width: 12vh;
             height: 12vh;
+        }
+
+        .v-btn.xl{
+             width: 7vh;
+            height: 7vh;
         }
     }
 }

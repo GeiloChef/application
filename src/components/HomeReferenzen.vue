@@ -37,7 +37,16 @@ export default {
     }
 }
 
+.content.md,
+.content.lg {
+
+    .text-headline {
+        margin-bottom: 0 !important;
+    }
+}
+
 .content.xs {
+
     .text {
         font-size: 150%
     }

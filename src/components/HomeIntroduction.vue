@@ -249,6 +249,12 @@ $stage3delay: 0.4s;
         .stage3 {
             margin-top: 2rem;
 
+            .e0 {
+                span {
+                    font-size: 120%!important;
+                }
+            }
+
             .subtitle {
                 opacity: 1;
 

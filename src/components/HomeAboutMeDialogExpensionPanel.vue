@@ -83,9 +83,12 @@ export default {
 <style lang="scss" scoped>
 @import "@/assets/variables.scss";
 
-
+.v-expansion-panel-title{
+    font-weight: bolder;
+    font-size: 110%;
+}
 .v-expansion-panel-text {
-    padding: 3%;
+    padding: 1% 3%;
     flex-wrap: wrap;
     p{
         width: 100%;

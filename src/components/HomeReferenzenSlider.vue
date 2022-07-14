@@ -2,9 +2,9 @@
     <div class="homeReferenzenSlider">
         <v-card theme="dark">
             <v-card theme="dark">
-                <v-window v-model="onboarding" class="referenceWindowParent">
+                <v-window v-model="onboarding" class="referenceWindowParent" :class="displayBreakpointName">
                     <v-window-item v-for="reference in references" v-bind:key="reference.id"
-                        v-bind:reference="reference" >
+                        v-bind:reference="reference">
                         <HomeReferenzWindowItem v-bind:key="reference.id" v-bind:reference="reference.attributes" />
                     </v-window-item>
                 </v-window>
@@ -69,7 +69,7 @@ export default {
         },
         showType() {
             this.references = this.referencesData.filter(item => {
-                 for (let type of this.selected) {
+                for (let type of this.selected) {
                     if (item.attributes.type === type) {
                         return item;
                     }
@@ -77,6 +77,9 @@ export default {
             })
 
         }
+    },
+    computed: {
+        displayBreakpointName() { return (this.$vuetify.display.name) }
     },
     created() {
         strapiService.getData('references').then(response => {
@@ -96,13 +99,19 @@ export default {
     overflow: hidden;
 }
 
-.referenceWindowParent{
+.referenceWindowParent.xl,
+.referenceWindowParent.xs {
     height: 450px;
     max-height: 450px;
+}
+
+.referenceWindowParent.md,
+.referenceWindowParent.lg{
+     height: 400px;
+    max-height: 400px;
 }
 
 .selector {
     background-color: #000000;
 }
-
 </style>

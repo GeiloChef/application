@@ -10,11 +10,14 @@
             <div class="input-parent flex">
                 <div class="input-child flex">
                     <Field name="identifier" type="text" value="" v-model="identifier" placeholder="Username" />
-                    <ErrorMessage name="identifier" />
                 </div>
                 <div class="input-child flex">
                     <Field name="password" type="text" value="" v-model="password" placeholder="Password" />
+
+                </div>
+                <div class="errorParent flex">
                     <ErrorMessage name="password" />
+                    <ErrorMessage name="identifier" />
                 </div>
                 <div class="button-child flex">
                     <button class="flex" :disabled="loading">
@@ -51,7 +54,6 @@ export default {
         const schema = yup.object().shape({
             identifier: yup.string().required("Bitte geben Sie Ihren Username ein."),
             password: yup.string().required("Bitte geben Sie Ihr Passwort ein."),
-
         })
         return {
             schema,
@@ -71,14 +73,20 @@ export default {
                 console.log(response)
                 if (response.error) {
                     // error handling
-                    console.log(response.error);
+                    // console.log(response.error);
+                    let alertInfo = {
+                        type: "error",
+                        text: "Anmeldung war nicht erfolgreich. Bitte überprüfen Sie Benutzername und Passwort."
+                    }
+                    console.log("Login failed...");
+                    this.$parent.$emit('setAlert', alertInfo);
                 } else {
                     // save and use userbased content
                     this.$parent.$emit('setUserbasedContent', response);
                     window.localStorage.setItem('userbasedContent', JSON.stringify(response.user))
                     window.localStorage.setItem('jwt', JSON.stringify(response.jwt));
                     // Set expiration date of Login
-                     window.localStorage.setItem('login_expires', jwt_decode(response.jwt).exp + Date.now())
+                    window.localStorage.setItem('login_expires', jwt_decode(response.jwt).exp + Date.now())
                     // change the view
                     this.$emit('loginDone');
                 }
@@ -91,8 +99,16 @@ export default {
 <style lang="scss" scoped>
 @import "@/assets/variables.scss";
 
+.errorParent{
+    max-width: 50vw;
+    span{
+        width: 100%;
+        text-align: center;
+    }
+}
 .loginForm {
     width: 100%;
+
     .loginHeader {
         text-align: center;
         margin-bottom: 3rem;
@@ -108,7 +124,7 @@ export default {
         width: 100%;
 
         .input-child {
-            width: 100%;
+            width: 50%;
 
             span {
                 color: red;

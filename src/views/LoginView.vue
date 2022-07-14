@@ -3,7 +3,7 @@
         <div class="flex">
             <div class="loginParent flex">
                 <h1>Felix' interaktive Bewerbung</h1>
-                <div v-if="!hideLoginForm" :class="moveLoginForm ? 'LoginAnimationOut' : ''">
+                <div v-if="!hideLoginForm" class="loginFormParent" :class="moveLoginForm ? 'LoginAnimationOut' : ''">
                     <LoginForm @loginDone="loginDone" />
                 </div>
                 <div v-if="hideLoginForm" :class="moveLoginForm ? 'LoginAnimationIn' : ''">
@@ -104,6 +104,10 @@ export default {
 
     .loginParent {
         margin-top: -5rem;
+
+        .loginFormParent{
+            width: 70%;
+        }
 
         h1 {
             font-size: 350%;

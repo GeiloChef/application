@@ -1,6 +1,6 @@
 <template>
     <div class="techStackCard fadeIn" ref="techstackCard" :class="displayBreakpointName">
-        <v-card class="mx-auto" max-width="200" rounded>
+        <v-card class="mx-auto" :class="displayBreakpointName" rounded>
             <v-img :src="image" height="100px" contain></v-img>
 
             <v-card-title>
@@ -26,7 +26,7 @@ export default {
     computed: {
         displayBreakpointName() { return (this.$vuetify.display.name) }
     },
-    created(){
+    created() {
         const API_URL = process.env.VUE_APP_STRAPI_IMAGE_URL || "https://strapi.bewerbung-von-felix.de";
         this.image = API_URL + this.item.displayedImage.data.attributes.url;
         console.log(API_URL)
@@ -38,9 +38,8 @@ export default {
 @import "@/assets/variables.scss";
 
 .techStackCard {
-    flex: 0 0 200px;
-    margin: 2% 1%;
-    .v-card-title{
+
+    .v-card-title {
         background-color: $primary_color;
         color: $secondary_color
     }
@@ -48,6 +47,26 @@ export default {
     .title {
         font-size: 100%;
         white-space: nowrap;
+    }
+}
+
+.techStackCard.xl {
+    flex: 0 0 200px;
+    margin: 2% 1%;
+
+    .v-card.xl {
+        max-width: 200px;
+    }
+}
+
+.techStackCard.lg,
+.techStackCard.md {
+    flex: 0 0 150px;
+    margin: 1% 1%;
+
+    .v-card.md,
+    .v-card.lg {
+        max-width: 150px;
     }
 }
 

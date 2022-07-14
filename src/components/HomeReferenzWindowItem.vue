@@ -1,6 +1,6 @@
 <template>
-    <div class="referenzWindowItem flex">
-        <v-card height="450" class="d-flex justify-center align-center referenzWindowItemCard">
+    <div class="referenzWindowItem flex" :class="displayBreakpointName">
+        <v-card class="d-flex justify-center align-center referenzWindowItemCard" :class="displayBreakpointName">
             <div class="referenz-display">
                 <v-card-title>
                     <span class="headline">{{ reference.title }}</span>
@@ -14,7 +14,9 @@
                     <span class="text" v-html="reference.summary"></span>
                 </v-card-text>
                 <v-card-actions>
-                    <v-btn v-for="link in reference.links.data" v-bind:key="link.attributes.href" :href="link.attributes.href" target="_blank" class="primary_color action_btn" size="small" rounded>
+                    <v-btn v-for="link in reference.links.data" v-bind:key="link.attributes.href"
+                        :href="link.attributes.href" target="_blank" class="primary_color action_btn" size="small"
+                        rounded>
                         {{ link.attributes.displayedName }}
                     </v-btn>
                 </v-card-actions>
@@ -28,13 +30,16 @@ export default {
     name: "HomeReferenzWindowItem",
     data: function () {
         return {
-            
+
         };
     },
     props: {
         reference: Object,
     },
-    mounted(){
+    computed: {
+        displayBreakpointName() { return (this.$vuetify.display.name) }
+    },
+    mounted() {
         console.log(this.reference);
     }
 }
@@ -42,10 +47,20 @@ export default {
 
 <style lang="scss" scoped>
 @import "@/assets/variables.scss";
-.referenzWindowItem{
+
+.referenzWindowItem.xl,
+.referenzWindowItem.xs {
     height: 450px;
     max-height: 450px;
     min-height: 450px;
+}
+
+
+.referenzWindowItem.md,
+.referenzWindowItem.lg {
+    height: 400px;
+    max-height: 400px;
+    min-height: 400px;
 }
 
 .referenzWindowItemCard {

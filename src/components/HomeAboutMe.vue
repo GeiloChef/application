@@ -81,6 +81,10 @@ export default {
     .text-parent {
         max-width: 80%;
 
+        .text-headline{
+            margin-bottom: 0!important;
+        }
+
         .text {
             font-size: 150%;
             padding-bottom: 2rem

@@ -20,6 +20,7 @@ export default {
         }
     },
     created() {
+        // get privacy-policy from API
         strapiService.getData('privacy-policy').then(response => {
             this.privacyPolicy = response.data.attributes
         })

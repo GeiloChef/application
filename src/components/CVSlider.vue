@@ -190,7 +190,6 @@ export default {
                 this.timelineMargin = {
                     marginLeft: marginValue + "px"
                 }
-                console.log(marginValue);
             }
         }
     },
@@ -207,7 +206,6 @@ export default {
             this.timelineMargin = {
                 marginLeft: marginValue + "px"
             }
-            console.log(marginValue);
         }
     }
 }

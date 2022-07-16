@@ -58,16 +58,21 @@ export default {
         };
     },
     methods: {
+        /**
+         * handles if a user (or the code) clicked on a stages button to go to the next stage
+         */
         stageButtonClicked() {
+            // get the current stage
             let index = this.currentStage;
             this.stages[index].status = false;
+            // set a short timeout and then get to the next stage
             setTimeout(() => {
                 this.stages[index].hidden = true;
                 this.stages[index + 1].hidden = false;
                 this.stages[index + 1].status = true;
             }, 700);
 
-            // make download button visible
+            // make download button visible, because its hidden on default until it's explanation is shown in the intro
             if (this.currentStage === 1) {
                 this.$parent.$emit('showDownloadButton');
             }
@@ -79,13 +84,24 @@ export default {
             }
             this.currentStage++;
         },
+        /**
+         * At the first visit the website is not completely shown so you put your attention 
+         * on the introduction. Once the intro was shown / skipped once, the full website is
+         * enabled. this in controlled by App.js
+         */
         enableFullWebsite() {
             this.$parent.$emit('enableFullWebsite');
             window.localStorage.setItem("introDisabled", true);
         },
+
+        /**
+         * skips the intro by going through all stages instantly and showing the "endscreen" of the animation
+         * If the last stage is already displayed, we show the intro again
+         */
         skipIntro() {
+            // check if where on the last stage already
             if (this.currentStage > (this.stages.length - 2)) {
-                // Last stage is shown, restart the intro
+                // Last stage is shown, so restart the intro
                 this.stages[this.stages.length - 1].status = false;
                 // when this animation is done, make sure every stage is hidden
                 setTimeout(() => {
@@ -101,13 +117,18 @@ export default {
                 }, 700);
 
 
-            } else {
+            } else { // end (if we're on last stage)
+                // if we're not on the last stage, we go through evers stage and click programatically on the "next" button to skip the animation
                 for (let i = this.currentStage; i <= (this.stages.length - 2); i++) {
                     this.stageButtonClicked();
                     this.skipIntroText = "Intro nochmals ansehen";
                 }
             }
         },
+        /**
+         * edits the given string by replacing the placeholder by an actual value
+         * @param {String} string 
+         */
         addCompanyName(string) {
             let formattedCompanyName = `<i>${this.userbasedContent.Firma}</i>`;
             try {
@@ -118,20 +139,23 @@ export default {
         }
     },
     computed: {
+        // used to get vuetify breakpoints for responsive design
         displayBreakpointName() { return (this.$vuetify.display.name) }
     },
     created() {
-        // set userbaded Content
+        // retrieve userbased content from localstorage
         this.userbasedContent = JSON.parse(window.localStorage.getItem("userbasedContent"));
-        console.log(this.userbasedContent);
+        // retrive salution from local storage
         if (window.localStorage.getItem("salution")) {
             this.salution = window.localStorage.getItem("salution");
         }
+        // get all introduction stages to generate the animated intro
         strapiService.getData('introduction-stages').then(response => {
             this.stages = response.data.map(stage => {
+                // hide all stages at default
                 stage.status = false;
                 stage.hidden = true;
-                // change displayed text
+                // change displayed text depending on the salution
                 switch (this.salution) {
                     case "formal":
                         stage.attributes.element0 = this.addCompanyName(stage.attributes.element0_formal)
@@ -150,7 +174,7 @@ export default {
                 }
                 return stage;
             });
-            // add the personal Information
+            // edit the last stage by adding the reason of application from the userbased content
             switch (this.salution) {
                 case "formal":
                     this.stages[this.stages.length - 1].attributes.element1 = this.userbasedContent.reasonForApplication_formal
@@ -165,14 +189,12 @@ export default {
 
             // Check if intro was shown once already
             if (window.localStorage.getItem("introDisabled") === "true") {
-                // If so, skip the intro
-                console.log("Skip Intro")
+                // If so, skip the intro for now
                 this.skipIntro();
             } else {
                 // otherwise make stage 1 visible
                 this.stages[0].status = true;
                 this.stages[0].hidden = false;
-                console.log(this.stages);
             }
         });
     },

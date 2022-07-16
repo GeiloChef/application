@@ -24,12 +24,13 @@ export default {
         }
     },
     computed: {
+        // used to get vuetify breakpoints for responsive design
         displayBreakpointName() { return (this.$vuetify.display.name) }
     },
     created() {
+        // set the image URL of the techstack images
         const API_URL = process.env.VUE_APP_STRAPI_IMAGE_URL || "https://strapi.bewerbung-von-felix.de";
         this.image = API_URL + this.item.displayedImage.data.attributes.url;
-        console.log(API_URL)
     }
 }
 </script>

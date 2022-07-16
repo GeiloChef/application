@@ -79,9 +79,11 @@ export default {
         }
     },
     computed: {
+        // used to get vuetify breakpoints for responsive design
         displayBreakpointName() { return (this.$vuetify.display.name) }
     },
     created() {
+        // get all references from API
         strapiService.getData('references').then(response => {
             this.references = response.data;
             this.referencesData = response.data;

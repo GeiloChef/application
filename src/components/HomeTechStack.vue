@@ -37,36 +37,45 @@ export default {
         };
     },
     computed: {
+        // used to get vuetify breakpoints for responsive design
         displayBreakpointName() { return (this.$vuetify.display.name) }
     },
     methods: {
+        /**
+         * shows the full techstack instead of the given default number
+         */
         showFullStack() {
+            // edit the button depending if all are shown or just the default number
             if(this.techstackItemsShown.length === this.techstackDefaultShownNumber){
                 this.buttonInfo.text = "Tech-Stack wieder einklappen";
             }else{
                 this.buttonInfo.text = "Mein Kompletter Tech-Stack";
             }
+            // decide on the current shown Number of items, if a user want to see all or just the default numebr
             this.techstackShownNumber = (this.techstackShownNumber === this.techstackDefaultShownNumber)
                 ? this.techstackItems.length
                 : this.techstackDefaultShownNumber
+            // empty all current shown techstack items from the array
             this.techstackItemsShown = [];
+            // add all (or the default once) in the array to display them
             for (let i = 0; i < this.techstackShownNumber; i++) {
                 this.techstackItemsShown.push(this.techstackItems[i]);
             }
-            console.log(this.techstackItemsShown.length);
         }
     },
     created() {
+        // get all techstack items from API
         strapiService.getData('techstacks').then(response => {
-            // console.log(response);
             this.techstackItems = response.data;
             this.techstackShownNumber = this.techstackDefaultShownNumber;
+            // show the default number of items at first
             for (let i = 0; i < this.techstackShownNumber; i++) {
                 this.techstackItemsShown.push(this.techstackItems[i]);
             }
         });
     },
     mounted() {
+        // change the button depending on the viewport size
         switch (this.$vuetify.display.name) {
             case "xs":
                 this.buttonInfo.size = "large"

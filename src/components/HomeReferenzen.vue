@@ -22,6 +22,7 @@ export default {
         HomeReferenzenSlider,
     },
     computed: {
+        // used to get vuetify breakpoints for responsive design
         displayBreakpointName() { return (this.$vuetify.display.name) }
     },
 }

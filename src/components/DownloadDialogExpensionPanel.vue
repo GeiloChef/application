@@ -45,10 +45,9 @@ export default {
         }
     },
     created() {
+        // Set needed data relations and retrieve download categories
         let relations = "[downloads][populate][links][populate][files][populate]"
         strapiService.getData('download-categories', relations).then(response => {
-            console.log(response);
-
             this.downloadCategories = response.data;
         })
     }

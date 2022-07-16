@@ -35,7 +35,6 @@ export default {
   },
   methods: {
     setUserbasedContent(content) {
-      console.log(content);
       this.$cookies.set("jwt", content.jwt);
       this.$cookies.set("logged-in", "true");
       this.userBasedContent = content.user
@@ -48,7 +47,6 @@ export default {
       this.showAlert = true;
       setTimeout(() => {
         this.showAlert = false;
-        console.log(this.alertInfo)
       }, 5000);
     }
   },

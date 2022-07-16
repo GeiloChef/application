@@ -76,6 +76,7 @@ export default {
         }
     },
     computed: {
+        // used to get vuetify breakpoints for responsive design
         displayBreakpointName() { return (this.$vuetify.display.name) }
     }
 }

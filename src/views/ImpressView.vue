@@ -20,6 +20,7 @@ export default {
         }
     },
     created() {
+        // get impress date from API
         strapiService.getData('impress').then(response => {
             this.impress = response.data.attributes
         })

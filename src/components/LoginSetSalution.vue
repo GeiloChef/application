@@ -58,17 +58,19 @@ export default {
         }
     },
     methods: {
+        /**
+         * save the user-set salution so we can edit texts later on
+         */
         saveSalution() {
             let salutionCookieValue;
-            console.log(this.salution);
-            if (this.salution === 0) {
-                // Formal salution
+            if (this.salution === 0) { // 0 = formal, 1 = personal
                 salutionCookieValue = "formal"
             } else {
                 salutionCookieValue = "personal"
             }
-            this.$cookies.set("salution", salutionCookieValue)
+            // this.$cookies.set("salution", salutionCookieValue)
             window.localStorage.setItem("salution", salutionCookieValue);
+            // redirect to home
             this.$router.push('/home');
         }
     }

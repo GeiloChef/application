@@ -63,25 +63,32 @@ export default {
         }
     },
     computed: {
+        // used to get vuetify breakpoints for responsive design
         displayBreakpointName() { return (this.$vuetify.display.name) }
     },
     methods: {
+        /**
+         * Sets a loading state to a button
+         */
         load() {
             this.loading = true
             setTimeout(() => (this.loading = false), 3000)
         },
+        /**
+         * verifies the login of a user
+         * @param {Array} user {identifier: String, password: String}
+         */
         handleLogin(user) {
-            console.log(user);
+            // request from the API if the user credentials are fitting
             strapiService.login(user).then(response => {
-                console.log(response)
+                // if theres an error with the credentials, we inform the user to try it again
                 if (response.error) {
                     // error handling
-                    // console.log(response.error);
                     let alertInfo = {
                         type: "error",
                         text: "Anmeldung war nicht erfolgreich. Bitte überprüfen Sie Benutzername und Passwort."
                     }
-                    console.log("Login failed...");
+                    // emit the alert to app.js
                     this.$parent.$emit('setAlert', alertInfo);
                 } else {
                     // save and use userbased content

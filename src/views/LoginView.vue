@@ -30,6 +30,10 @@ export default {
         }
     },
     methods: {
+        /**
+         * triggered from the login form, this hides the login form and
+         * shows the set-salution form
+         */
         loginDone() {
             this.moveLoginForm = true;
             setTimeout(() => {

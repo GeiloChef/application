@@ -33,9 +33,14 @@ export default {
         };
     },
     computed: {
+        // used to get vuetify breakpoints for responsive design
         displayBreakpointName() { return (this.$vuetify.display.name) },
     },
     methods: {
+        /**
+         * edits a given String by replacing placeholders by actual values
+         * @param {String} string 
+         */
         editContent(string) {
             let contentToEdit = [
                 {
@@ -52,6 +57,10 @@ export default {
             }
             return string;
         },
+        /**
+         * Calculates the age between the given date and now
+         * @param {Date} birthday 
+         */
         calculateAge(birthday) { // birthday is a date
             let ageDifMs = Date.now() - birthday;
             let ageDate = new Date(ageDifMs); // miliseconds from epoch
@@ -60,7 +69,6 @@ export default {
     },
     created() {
         strapiService.getData('aboutmeshort').then(response => {
-            console.log(response.data.attributes.aboutme);
             this.aboutMeShort = this.editContent(response.data.attributes.aboutme);
         });
     }

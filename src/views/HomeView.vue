@@ -31,12 +31,16 @@ export default {
     }
   },
   methods: {
+    /**
+     * triggerd from the animated introduction, this enables
+     * the scroll on the full website
+     */
     enableFullWebsite() {
-      console.log("enable Full Website");
       this.viewFixed = false;
     }
   },
   computed: {
+    // used to get vuetify breakpoints for responsive design
     displayBreakpointName() { return (this.$vuetify.display.name) }
   },
 

@@ -37,11 +37,9 @@ export default {
         reference: Object,
     },
     computed: {
+        // used to get vuetify breakpoints for responsive design
         displayBreakpointName() { return (this.$vuetify.display.name) }
     },
-    mounted() {
-        console.log(this.reference);
-    }
 }
 </script>
 

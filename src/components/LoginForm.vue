@@ -7,7 +7,7 @@
             </div>
         </div>
         <Form @submit="handleLogin" :validation-schema="schema">
-            <div class="input-parent flex">
+            <div class="input-parent flex" :class="displayBreakpointName">
                 <div class="input-child flex">
                     <Field name="identifier" type="text" value="" v-model="identifier" placeholder="Username" />
                 </div>
@@ -62,6 +62,9 @@ export default {
             password: "",
         }
     },
+    computed: {
+        displayBreakpointName() { return (this.$vuetify.display.name) }
+    },
     methods: {
         load() {
             this.loading = true
@@ -99,13 +102,18 @@ export default {
 <style lang="scss" scoped>
 @import "@/assets/variables.scss";
 
-.errorParent{
+html,body {
+    height: 100%; /* Needed for container's min-height  */  
+}
+.errorParent {
     max-width: 50vw;
-    span{
+
+    span {
         width: 100%;
         text-align: center;
     }
 }
+
 .loginForm {
     width: 100%;
 
@@ -118,7 +126,9 @@ export default {
         }
     }
 
-    .input-parent {
+    .input-parent.xl,
+    .input-parent.lg,
+    .input-parent.md {
         display: flex;
         flex-wrap: wrap;
         width: 100%;
@@ -131,6 +141,20 @@ export default {
             }
         }
 
+    }
+
+    .input-parent.xs,
+    .input-parent.sm {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+
+        .input-child {
+            width: 100%;
+        }
+    }
+
+    .input-parent {
         input {
             border: 1px solid $primary_color;
             color: $primary_color;

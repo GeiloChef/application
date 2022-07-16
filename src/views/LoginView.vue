@@ -101,6 +101,7 @@ export default {
 
 .login {
     height: 100vh;
+    padding-top: 2rem;
 
     .loginParent {
         margin-top: -5rem;

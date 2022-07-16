@@ -48,7 +48,7 @@ export default {
                 },
             ]
             for (let content of contentToEdit) {
-                string =  string.replace(content.name, content.value);
+                string = string.replace(content.name, content.value);
             }
             return string;
         },
@@ -81,8 +81,8 @@ export default {
     .text-parent {
         max-width: 80%;
 
-        .text-headline{
-            margin-bottom: 0!important;
+        .text-headline {
+            margin-bottom: 0 !important;
         }
 
         .text {
@@ -98,6 +98,11 @@ export default {
     img {
         max-width: 90%;
         border-radius: 5%;
+    }
+
+    .text-headline {
+        margin-top: 1rem;
+        margin-bottom: 1rem!important;
     }
 }
 </style>

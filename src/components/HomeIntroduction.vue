@@ -14,19 +14,19 @@
                 <div class="wrapper" v-if="!stage.hidden" :class="[(stage.status ? '' : 'moveToLeft')]">
                     <div class="e0 animate subtitle fadeIn" v-if="stage.attributes.element0"
                         :class="'s' + (stage.id - 1)">
-                        <span v-html="stage.attributes.element0"></span>
+                        <span v-html="stage.attributes.element0" :class="displayBreakpointName"></span>
                     </div>
                     <div class="e1 animate subtitle fadeIn" v-if="stage.attributes.element1"
                         :class="'s' + (stage.id - 1)">
-                        <span v-html="stage.attributes.element1"></span>
+                        <span v-html="stage.attributes.element1" :class="displayBreakpointName"></span>
                     </div>
                     <div class="e2 animate subtitle fadeIn" v-if="stage.attributes.element2"
                         :class="'s' + (stage.id - 1)">
-                        <span v-html="stage.attributes.element2"></span>
+                        <span v-html="stage.attributes.element2" :class="displayBreakpointName"></span>
                     </div>
                     <div class="e2 animate subtitle fadeIn" v-if="stage.attributes.element3"
                         :class="'s' + (stage.id - 1)">
-                        <span v-html="stage.attributes.element3"></span>
+                        <span v-html="stage.attributes.element3" :class="displayBreakpointName"></span>
                     </div>
                     <div class="e4 animate subtitle fadeIn" v-if="stage.attributes.buttoninfo"
                         :class="'s' + (stage.id - 1)">
@@ -251,7 +251,7 @@ $stage3delay: 0.4s;
 
             .e0 {
                 span {
-                    font-size: 120%!important;
+                    font-size: 120% !important;
                 }
             }
 
@@ -301,7 +301,14 @@ $stage3delay: 0.4s;
                 font-size: 175% !important; // new
             }
 
+            .subtitle {
 
+                span {
+                    max-width: 100%;
+                    font-size: 3vw;
+
+                }
+            }
         }
     }
 }

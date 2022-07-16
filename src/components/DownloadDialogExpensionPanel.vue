@@ -18,8 +18,9 @@
                                 {{ download.attributes.shortDescription }}
                                 <div class="actionButtons">
                                     <v-btn v-for="link in download.attributes.links.data"
-                                        v-bind:key="link.attributes.href" class="primary_color action_btn" size="small"
-                                        rounded>
+                                        v-bind:key="link.attributes.name" class="primary_color action_btn" size="small"
+                                        rounded :href="link.attributes.href || linkToImages + link.attributes.files.data[0].attributes.url"
+                                        target="_blank">
                                         {{ link.attributes.displayedName }}
                                     </v-btn>
                                 </div>
@@ -40,14 +41,15 @@ export default {
     data: () => {
         return {
             downloadCategories: "",
+            linkToImages: process.env.VUE_APP_STRAPI_IMAGE_URL || "https://strapi.bewerbung-von-felix.de/api ",
         }
     },
     created() {
-        let relations = "[downloads][populate][links][populate]"
+        let relations = "[downloads][populate][links][populate][files][populate]"
         strapiService.getData('download-categories', relations).then(response => {
             console.log(response);
-            this.downloadCategories = response.data;
 
+            this.downloadCategories = response.data;
         })
     }
 }

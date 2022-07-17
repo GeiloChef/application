@@ -42,7 +42,7 @@
         <div class="save-button">
             <div class="button-child flex">
                 <button class="flex" :disabled="loading" @click="saveSalution">
-                    <span v-if="!loading">Zur Interaktiven Bewerbung</span>
+                    <span v-if="!loading">Zur interaktiven Bewerbung</span>
                 </button>
             </div>
         </div>

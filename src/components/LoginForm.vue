@@ -133,6 +133,7 @@ html,body {
         }
     }
 
+    .input-parent.xxl,
     .input-parent.xl,
     .input-parent.lg,
     .input-parent.md {
@@ -141,6 +142,7 @@ html,body {
         width: 100%;
 
         .input-child {
+            flex: 0 0 50%;
             width: 50%;
 
             span {

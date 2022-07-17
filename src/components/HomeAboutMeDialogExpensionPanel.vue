@@ -46,8 +46,10 @@ export default {
                 },
             ]
             for (let content of contentToEdit) {
-                return string.replace(content.name, content.value);
+                string = string.replace(content.name, content.value);
             }
+            return string;
+
         },
         /**
          * Calculates the Age from a given Daten until now.

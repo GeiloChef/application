@@ -60,6 +60,15 @@ export default {
     }
 }
 
+.techStackCard.xxl {
+    flex: 0 0 200px;
+    margin: 2% 1%;
+
+    .v-card.xxl {
+        max-width: 200px;
+    }
+}
+
 .techStackCard.lg,
 .techStackCard.md {
     flex: 0 0 150px;

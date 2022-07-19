@@ -63,7 +63,15 @@ export default {
                 shortSummary: "Erstellung Webshop"
             },
             {
-                id: 1,
+                id: 4,
+                date_from: "2021",
+                // date_to: "2022",
+                title: "instoremedia-online.de",
+                summary: "Planung, Ausarbeitung, Erstellung & Wartung der Firmenhomepage für meinen Arbeitgeber im-instoremedia.",
+                shortSummary: "Erstellung Firmenwebseite"
+            },
+            {
+                id: 3,
                 date_from: "2022",
                 date_to: false,
                 title: "Gepr. Web Application Developer",
@@ -96,9 +104,9 @@ export default {
     font-size: 125%;
 }
 
-.display.xs{
-   .headline {
-    font-size: 150%!important;
-} 
+.display.xs {
+    .headline {
+        font-size: 150% !important;
+    }
 }
 </style>

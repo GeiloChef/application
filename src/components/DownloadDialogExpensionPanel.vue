@@ -41,7 +41,7 @@ export default {
     data: () => {
         return {
             downloadCategories: "",
-            linkToImages: process.env.VUE_APP_STRAPI_IMAGE_URL || "https://strapi.bewerbung-von-felix.de/api ",
+            linkToImages: process.env.VUE_APP_STRAPI_IMAGE_URL || "https://strapi.bewerbung-von-felix.de",
         }
     },
     created() {

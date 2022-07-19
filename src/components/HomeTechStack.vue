@@ -5,7 +5,7 @@
             <div class="techStack flex" :class="displayBreakpointName" v-if="techstackShownNumber !== 0">
                 <TechStackCard v-for="item in techstackItemsShown" v-bind:item="item.attributes" v-bind:key="item.id" />
             </div>
-            <div class="buttonParent" :class="displayBreakpointName">
+            <div v-if="showButton" class="buttonParent" :class="displayBreakpointName">
                 <ButtonComponent @clicked="showFullStack" v-bind:buttonInfo="buttonInfo" />
             </div>
         </div>
@@ -26,6 +26,7 @@ export default {
             class: "primary_color",
             text: "Mein Kompletter Tech-Stack",
             size: "x-large",
+            showButton: false,
             block: true,
         }
         return {
@@ -67,7 +68,7 @@ export default {
         // get all techstack items from API
         strapiService.getData('techstacks').then(response => {
             this.techstackItems = response.data;
-            this.techstackShownNumber = this.techstackDefaultShownNumber;
+            this.techstackShownNumber = this.techstackItems.length;
             // show the default number of items at first
             for (let i = 0; i < this.techstackShownNumber; i++) {
                 this.techstackItemsShown.push(this.techstackItems[i]);
@@ -75,6 +76,7 @@ export default {
         });
     },
     mounted() {
+        // this.showFullStack();
         // change the button depending on the viewport size
         switch (this.$vuetify.display.name) {
             case "xs":

@@ -52,7 +52,7 @@ export default {
     },
     data: () => {
         const schema = yup.object().shape({
-            identifier: yup.string().required("Bitte geben Sie Ihren Username ein."),
+            identifier: yup.string().required("Bitte geben Sie Ihren Benutzername ein."),
             password: yup.string().required("Bitte geben Sie Ihr Passwort ein."),
         })
         return {

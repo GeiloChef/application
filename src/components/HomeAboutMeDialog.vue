@@ -5,7 +5,7 @@
                 <ButtonComponent v-bind="props" v-bind:buttonInfo="buttonInfo" />
             </template>
             <template v-slot:default="{ isActive }">
-                <v-card class="w100">
+                <v-card class="w90">
                     <v-toolbar class="primary_color title">Mehr Details über mich und mein Leben</v-toolbar>
                     <v-card-text class="secondary_color">
                         <HomeAboutMeDialogExpensionPanel />
@@ -43,7 +43,7 @@ export default {
 <style lang="scss" scoped>
 @import "@/assets/variables.scss";
 
-.w100 {
+.w90 {
     width: 90vw;
 }
 

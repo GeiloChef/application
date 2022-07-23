@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="downloadDialogExpensionPanel" :class="displayBreakpointName">
         <!-- <div class="text-subtitle-2 mb-2">With markup</div> -->
 
         <v-expansion-panels>
@@ -19,7 +19,8 @@
                                 <div class="actionButtons">
                                     <v-btn v-for="link in download.attributes.links.data"
                                         v-bind:key="link.attributes.name" class="primary_color action_btn" size="small"
-                                        rounded :href="link.attributes.href || linkToImages + link.attributes.files.data[0].attributes.url"
+                                        rounded
+                                        :href="link.attributes.href || linkToImages + link.attributes.files.data[0].attributes.url"
                                         target="_blank">
                                         {{ link.attributes.displayedName }}
                                     </v-btn>
@@ -50,17 +51,38 @@ export default {
         strapiService.getData('download-categories', relations).then(response => {
             this.downloadCategories = response.data;
         })
-    }
+    },
+    computed: {
+        // used to get vuetify breakpoints for responsive design
+        displayBreakpointName() { return (this.$vuetify.display.name) }
+    },
 }
 </script>
 
 <style lang="scss" scoped>
 @import "@/assets/variables.scss";
 
-.actionButtons{
-    .v-btn{
-        margin: .2rem
-    }
 
+.v-expansion-panel-title{
+    text-align: left;
+}
+.downloadDialogExpensionPanel.xl,
+.downloadDialogExpensionPanel.lg,
+.downloadDialogExpensionPanel.md{
+
+    .actionButtons {
+        .v-btn {
+            margin: .2rem
+        }
+    }
+}
+
+.downloadDialogExpensionPanel.xs,
+.downloadDialogExpensionPanel.sm{
+    .actionButtons {
+        .v-btn {
+            margin: .2rem
+        }
+    }
 }
 </style>

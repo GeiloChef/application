@@ -7,7 +7,7 @@
         </router-view>
       </v-scroll-x-transition>
       <DownloadDialog v-if="downloadButtonStatus" />
-      <div class="alert" v-if="showAlert">
+      <div class="alert" :class="displayBreakpointName" v-if="showAlert">
         <AlertComponent v-bind:alertInfo="alertInfo" />
       </div>
 
@@ -71,12 +71,23 @@ body {
   overflow: hidden;
 }
 
-.alert {
+.alert.xl,
+.alert.lg,
+.alert.md {
   position: fixed;
   bottom: 2vh;
   z-index: 9999;
   width: 50vw;
   margin-left: 25vw;
+}
+
+.alert.xs,
+.alert.sm{
+  position: fixed;
+  top: 2vh;
+  z-index: 9999;
+  width: 90vw;
+  margin-left: 5vw;
 }
 
 /* width */

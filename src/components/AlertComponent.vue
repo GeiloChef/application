@@ -1,6 +1,6 @@
 <template>
-    <div class="alertParent">
-        <v-alert prominent color="red lighten-3" :type="alertInfo.type" variant="outlined">
+    <div class="alertParent" :class="displayBreakpointName">
+        <v-alert prominent color="red lighten-3" :type="alertInfo.type" elevated>
                 {{ alertInfo.text }}            
         </v-alert>
     </div>
@@ -17,8 +17,10 @@ export default {
     props: {
         alertInfo: Object,
     },
-    created() {
-    }
+    computed: {
+        // used to get vuetify breakpoints for responsive design
+        displayBreakpointName() { return (this.$vuetify.display.name) }
+    },
 }
 </script>
 

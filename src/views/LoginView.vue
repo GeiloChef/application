@@ -104,11 +104,11 @@ export default {
 
 
 .login {
-    height: 100vh;
-    padding-top: 2rem;
+    min-height: 100vh;
+    // padding-top: 2rem;
 
     .loginParent {
-        margin-top: -5rem;
+        // margin-top: -5rem;
 
         .loginFormParent{
             width: 70%;

@@ -107,6 +107,7 @@ export default {
 .v-expansion-panel-title {
     font-weight: bolder;
     font-size: 110%;
+    text-align: left;
 }
 
 .v-expansion-panel-text {

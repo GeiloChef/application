@@ -1,5 +1,5 @@
 <template>
-    <div class="loginSetSalution flex">
+    <div class="loginSetSalution flex" :class="this.$vuetify.display.name">
         <!-- <div class="salutionTitle">Login erfolgreich</div> -->
         <div class="salutionSubtitle">In einigen der folgenden Texte werden Sie direkt angesprochen. Bitte wählen Sie
             aus, wie ich Sie im weitern Verlauf ansprechen darf:</div>
@@ -73,7 +73,10 @@ export default {
             // redirect to home
             this.$router.push('/home');
         }
-    }
+    },
+    computed: {
+        displayBreakpointName() { return (this.$vuetify.display.name) }
+    },
 
 }
 </script>
@@ -81,7 +84,10 @@ export default {
 <style lang="scss" scoped>
 @import "@/assets/variables.scss";
 
-.loginSetSalution {
+
+.loginSetSalution.xl,
+.loginSetSalution.lg,
+.loginSetSalution.md {
     text-align: center;
     width: 100%;
 
@@ -90,46 +96,104 @@ export default {
         font-size: 200%;
         margin-bottom: 3rem;
     }
-}
 
-.selection {
-    width: 100%;
-
-    .v-card {
-        position: relative;
-        overflow: hidden;
-        border-radius: 12px;
-        border: 1px solid $primary_color;
-    }
-
-    .selection-button {
-        width: 30%;
-        margin: 0 5%;
-
-        .buttonText {
-            font-size: 200%
-        }
-    }
-}
-
-.save-button {
-    width: 100%;
-
-    .button-child {
+    .selection {
         width: 100%;
 
-        button {
-            background: $secondary_color;
+        .v-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
             border: 1px solid $primary_color;
-            border-radius: 32px;
-            margin: 2% 8%;
-            color: white;
-            height: 3rem;
-            width: 25%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        }
+
+        .selection-button {
+            width: 30%;
+            margin: 0 5%;
+
+            .buttonText {
+                font-size: 200%
+            }
+        }
+    }
+
+    .save-button {
+        width: 100%;
+
+        .button-child {
+            width: 100%;
+
+            button {
+                background: $secondary_color;
+                border: 1px solid $primary_color;
+                border-radius: 32px;
+                margin: 2% 8%;
+                color: white;
+                height: 3rem;
+                width: 25%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
         }
     }
 }
+
+
+.loginSetSalution.xs,
+.loginSetSalution.sm {
+    text-align: center;
+    width: 100%;
+
+    .salutionSubtitle {
+        width: 75%;
+        font-size: 150%;
+        margin-bottom: 3rem;
+    }
+
+    .selection {
+        width: 100%;
+
+        .v-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            border: 1px solid $primary_color;
+        }
+
+        .selection-button {
+            width: 100%;
+            margin: 5% 0%;
+
+            .buttonText {
+                font-size: 200%
+            }
+        }
+    }
+
+    .save-button {
+        width: 100%;
+        margin-bottom: 3rem;
+
+        .button-child {
+            width: 100%;
+
+            button {
+                background: $secondary_color;
+                border: 1px solid $primary_color;
+                border-radius: 32px;
+                margin: 2% 8%;
+                color: white;
+                height: 3rem;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+    }
+}
+
+
+
 </style>

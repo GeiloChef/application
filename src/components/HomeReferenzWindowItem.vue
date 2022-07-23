@@ -1,9 +1,9 @@
 <template>
     <div class="referenzWindowItem flex" :class="displayBreakpointName">
         <v-card class="d-flex justify-center align-center referenzWindowItemCard" :class="displayBreakpointName">
-            <div class="referenz-display">
+            <div class="referenz-display" :class="displayBreakpointName">
                 <v-card-title>
-                    <span class="headline">{{ reference.title }}</span>
+                    <span class="headline" >{{ reference.title }}</span>
                 </v-card-title>
                 <v-card-subtitle>
                     <span class="subtitle">
@@ -77,5 +77,14 @@ export default {
 
 .subtitle {
     font-size: 150%;
+}
+
+.referenz-display.sm,
+.referenz-display.xs{
+    width: 100%;
+    
+    .headline{
+        font-size: 150%!important;
+    }
 }
 </style>

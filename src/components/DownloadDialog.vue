@@ -9,10 +9,10 @@
                     </div>
                 </template>
                 <template v-slot:default="{ isActive }">
-                    <v-card>
-                        <v-toolbar class="primary_color">Downloads</v-toolbar>
+                    <v-card class="w90">
+                        <v-toolbar class="primary_color title">Downloads</v-toolbar>
                         <v-card-text class="secondary_color">
-                            <div class="text-h2 pa-12">Hier finden Sie die wichtigsten Dateien zu meiner Bewerbung</div>
+                            <div class="text-h6 subtitle" :class="displayBreakpointName">Hier finden Sie die wichtigsten Dateien zu meiner Bewerbung</div>
                             <DownloadDialogExpensionPanel />
                         </v-card-text>
                         <v-card-actions class="secondary_color justify-end">
@@ -61,6 +61,15 @@ export default {
     animation-fill-mode: forwards;
 }
 
+.w90 {
+    width: 90vw;
+}
+
+.subtitle.xs,
+.subtitle.sm{
+    font-size: 100%;
+    padding: 12px 0;
+}
 .downloadDialog {
     .button {
         position: fixed;

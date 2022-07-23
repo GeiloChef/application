@@ -11,6 +11,14 @@ class StrapiAPI {
             });
     }
 
+    async getDataWithoutPopulateQuery(table, populate = "=*") {
+        return fetch(API_URL + table + '?' + populate)
+            .then(response => response.json())
+            .then(data => {
+                return data;
+            });
+    }
+
     async login(dataObject) {
         return fetch(API_URL + 'auth/local', {
             method: 'POST',

@@ -84,7 +84,8 @@ export default {
     },
     created() {
         // get all references from API
-        strapiService.getData('references').then(response => {
+        let relations = "[populate][links][populate][files][populate]"
+        strapiService.getDataWithoutPopulateQuery('references', relations).then(response => {
             this.references = response.data;
             this.referencesData = response.data;
         })

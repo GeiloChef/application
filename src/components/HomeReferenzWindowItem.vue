@@ -14,10 +14,11 @@
                     <span class="text" v-html="reference.summary"></span>
                 </v-card-text>
                 <v-card-actions>
-                    <v-btn v-for="link in reference.links.data" v-bind:key="link.attributes.href"
-                        :href="link.attributes.href" target="_blank" class="primary_color action_btn" size="small"
+                    <v-btn v-for="link in reference.links.data" v-bind:key="link.attributes.name"
+                        :href="link.attributes.href || linkToImages + link.attributes.files.data[0].attributes.url" target="_blank" class="primary_color action_btn" size="small"
                         rounded>
                         {{ link.attributes.displayedName }}
+
                     </v-btn>
                 </v-card-actions>
             </div>
@@ -30,7 +31,7 @@ export default {
     name: "HomeReferenzWindowItem",
     data: function () {
         return {
-
+            linkToImages: process.env.VUE_APP_STRAPI_IMAGE_URL || "https://strapi.bewerbung-von-felix.de",
         };
     },
     props: {
@@ -39,7 +40,7 @@ export default {
     computed: {
         // used to get vuetify breakpoints for responsive design
         displayBreakpointName() { return (this.$vuetify.display.name) }
-    },
+    }
 }
 </script>
 

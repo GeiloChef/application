@@ -47,9 +47,9 @@ export default {
          */
         showFullStack() {
             // edit the button depending if all are shown or just the default number
-            if(this.techstackItemsShown.length === this.techstackDefaultShownNumber){
+            if (this.techstackItemsShown.length === this.techstackDefaultShownNumber) {
                 this.buttonInfo.text = "Tech-Stack wieder einklappen";
-            }else{
+            } else {
                 this.buttonInfo.text = "Mein Kompletter Tech-Stack";
             }
             // decide on the current shown Number of items, if a user want to see all or just the default numebr
@@ -62,11 +62,19 @@ export default {
             for (let i = 0; i < this.techstackShownNumber; i++) {
                 this.techstackItemsShown.push(this.techstackItems[i]);
             }
-        }
+        },
+
     },
     created() {
         // get all techstack items from API
         strapiService.getData('techstacks').then(response => {
+            console.log(response.data);
+            // Sort the techstack array to display all items in the wanted order
+            response.data.sort(function (a, b) {
+                let keyA = a.attributes.displayOrder 
+                let keyB = b.attributes.displayOrder
+                return (keyA < keyB) ? -1 : 0;
+            });
             this.techstackItems = response.data;
             this.techstackShownNumber = this.techstackItems.length;
             // show the default number of items at first

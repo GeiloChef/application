@@ -2,7 +2,7 @@
     <div class="homeAboutMe secondary_color">
         <div class="content flex" :class="displayBreakpointName">
             <div class="col flex image" :class="displayBreakpointName">
-                <img src="https://image.brigitte.de/11674438/t/-B/v3/w1440/r1.5/-/bewerbung-foto-bild.jpg" />
+                <img src="/profilbild.png" />
             </div>
             <div class="col flex" :class="displayBreakpointName">
                 <div class="text-parent">

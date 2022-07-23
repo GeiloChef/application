@@ -78,4 +78,26 @@ body {
   width: 50vw;
   margin-left: 25vw;
 }
+
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+  background-color: black;
+  opacity: 0.4;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  // box-shadow: inset 0 0 5px lightgray;
+  // border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  // background: $primary_color;
+  // box-shadow: inset 0 0 1px black;
+  background-color: white;
+  opacity: 0.4;
+  border-radius: 10px;
+}
 </style>

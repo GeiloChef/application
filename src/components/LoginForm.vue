@@ -39,9 +39,6 @@
 import { Form, Field, ErrorMessage } from "vee-validate";
 import * as yup from "yup";
 
-import jwt_decode from "jwt-decode";
-
-
 import strapiService from '@/services/strapi.service'
 export default {
     name: "LoginForm",
@@ -96,7 +93,7 @@ export default {
                     window.localStorage.setItem('userbasedContent', JSON.stringify(response.user))
                     window.localStorage.setItem('jwt', JSON.stringify(response.jwt));
                     // Set expiration date of Login
-                    window.localStorage.setItem('login_expires', jwt_decode(response.jwt).exp + Date.now())
+                    window.localStorage.setItem('login_expires', (1000 * 60 * 60 * 7) + Date.now())
                     // change the view
                     this.$emit('loginDone');
                 }
